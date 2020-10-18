@@ -1,0 +1,51 @@
+<?php
+
+class DatabaseHandler
+{
+    public static $dbName = "moneytracker";
+    public static $server = "localhost";
+    public static $user = "root";
+    public static $password = "Julien_SqlDEV";
+
+    private static function connect()
+    {
+        $conn = new PDO("mysql:host=".self::$server.";dbname=".self::$dbName, self::$user, self::$password);
+        $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        return $conn;
+    }
+
+    public static function query($sql, ...$params)
+    {
+        if ($params != null) {
+            return self::queryStmt($sql, $params);
+        } else {
+            return self::queryNoStmt($sql);
+        }
+    }
+
+    private static function queryStmt($sql, $params)
+    {
+        $conn = self::connect();
+        $stmt = $conn->prepare($sql);
+        $stmt->execute($params);
+        return filterOutput($stmt);
+    }
+
+    private static function queryNoStmt($sql)
+    {
+        $conn = self::connect();
+        $dataTable = $conn->query($sql);
+        return filterOutput($dataTable);
+    }
+
+    private static function filterOutput($dataTable, $sql){
+        if($dataTable->rowCount() > 0){
+            switch(explode(" ", $sql[0])){
+                case "SELECT": 
+                    return $dataTable->fetchAll(PDO::FETCH_ASSOC);
+                default: break;
+            }
+        }
+        return null;
+    }
+}
