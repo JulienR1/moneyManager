@@ -14,6 +14,11 @@ function datePickerLoad() {
   selectMonthOf(selectedDate);
   loadMonth();
   selectDate(selectedDate);
+
+  document.getElementById("datePicker").addEventListener("click", (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+  });
 }
 
 function loadMonth() {

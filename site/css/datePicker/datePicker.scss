@@ -14,6 +14,17 @@ $calendarGap: 5px;
   background: #fff;
   border-radius: 5px;
   border: $fieldBorder 1px solid;
+  z-index: 10;
+
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  transition: all $shortDelay ease;
+
+  &[enabled] {
+    opacity: 1;
+    visibility: visible;
+  }
 
   #pickerHeader {
     width: calc(100% - #{$pickerHeaderMargin} * 2);
@@ -50,6 +61,7 @@ $calendarGap: 5px;
       font-weight: 400;
       font-size: $fontSize;
       padding: 5px $pickerHeaderMargin;
+      user-select: none;
     }
   }
 
@@ -78,6 +90,7 @@ $calendarGap: 5px;
           font-family: "Poppins", Arial, Helvetica, sans-serif;
           font-weight: 300;
           font-size: 12px;
+          user-select: none;
         }
 
         &[disabled] {

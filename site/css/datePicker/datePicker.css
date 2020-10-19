@@ -5,6 +5,17 @@
   background: #fff;
   border-radius: 5px;
   border: #a0a0a0 1px solid;
+  z-index: 10;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease;
+}
+
+#datePicker[enabled] {
+  opacity: 1;
+  visibility: visible;
 }
 
 #datePicker #pickerHeader {
@@ -49,6 +60,10 @@
   font-weight: 400;
   font-size: 15px;
   padding: 5px 15px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 #datePicker #calendar {
@@ -83,6 +98,10 @@
   font-family: "Poppins", Arial, Helvetica, sans-serif;
   font-weight: 300;
   font-size: 12px;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 #datePicker #calendar ul li[disabled] {
