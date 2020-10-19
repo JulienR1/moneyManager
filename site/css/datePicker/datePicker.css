@@ -1,0 +1,96 @@
+#datePicker {
+  position: absolute;
+  width: 100%;
+  min-width: 300px;
+  background: #fff;
+  border-radius: 5px;
+  border: #a0a0a0 1px solid;
+}
+
+#datePicker #pickerHeader {
+  width: calc(100% - 15px * 2);
+  margin: 15px;
+  background-color: #f5f5f5;
+  border-radius: 5px;
+  text-align: center;
+}
+
+#datePicker #pickerHeader button {
+  display: inline-block;
+  outline: none;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#datePicker #pickerHeader button i {
+  font-size: 23px;
+  -webkit-transform: translate(0, calc((8px) / 2));
+          transform: translate(0, calc((8px) / 2));
+  -webkit-transition: -webkit-transform 0.15s ease-in-out;
+  transition: -webkit-transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out;
+  transition: transform 0.15s ease-in-out, -webkit-transform 0.15s ease-in-out;
+}
+
+#datePicker #pickerHeader button:first-of-type:hover i {
+  -webkit-transform: translate(-3px, calc((8px) / 2));
+          transform: translate(-3px, calc((8px) / 2));
+}
+
+#datePicker #pickerHeader button:last-of-type:hover i {
+  -webkit-transform: translate(3px, calc((8px) / 2));
+          transform: translate(3px, calc((8px) / 2));
+}
+
+#datePicker #pickerHeader h3 {
+  display: inline-block;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 15px;
+  padding: 5px 15px;
+}
+
+#datePicker #calendar {
+  width: calc(100% - 15px * 2);
+  margin: 15px;
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-rows: (1fr)[6];
+      grid-template-rows: repeat(6, 1fr);
+  gap: 5px;
+}
+
+#datePicker #calendar ul {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: (1fr)[7];
+      grid-template-columns: repeat(7, 1fr);
+  gap: 5px;
+  list-style-type: none;
+  padding: 0;
+}
+
+#datePicker #calendar ul li {
+  width: 100%;
+  background: #f5f5f5;
+  cursor: pointer;
+}
+
+#datePicker #calendar ul li span {
+  margin: 3px;
+  display: block;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-weight: 300;
+  font-size: 12px;
+}
+
+#datePicker #calendar ul li[disabled] {
+  opacity: 0.5;
+  cursor: default;
+}
+
+#datePicker #calendar ul li[selected] {
+  background: #9ae9a7;
+}
+/*# sourceMappingURL=datePicker.css.map */

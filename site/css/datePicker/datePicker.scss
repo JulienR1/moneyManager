@@ -1,0 +1,94 @@
+@import "../colors";
+@import "../variables";
+
+$pickerHeaderMargin: 15px;
+$pickerBodyMargin: 15px;
+$fontSize: 15px;
+$arrowFontSize: 23px;
+$calendarGap: 5px;
+
+#datePicker {
+  position: absolute;
+  width: 100%;
+  min-width: 300px;
+  background: #fff;
+  border-radius: 5px;
+  border: $fieldBorder 1px solid;
+
+  #pickerHeader {
+    width: calc(100% - #{$pickerHeaderMargin} * 2);
+    margin: $pickerHeaderMargin;
+    background-color: $fieldBackground;
+    border-radius: 5px;
+    text-align: center;
+
+    button {
+      display: inline-block;
+      outline: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+
+      i {
+        font-size: $arrowFontSize;
+        transform: translate(0, calc((#{$arrowFontSize - $fontSize}) / 2));
+        transition: transform $shorterDelay ease-in-out;
+      }
+
+      &:first-of-type:hover i {
+        transform: translate(-3px, calc((#{$arrowFontSize - $fontSize}) / 2));
+      }
+
+      &:last-of-type:hover i {
+        transform: translate(3px, calc((#{$arrowFontSize - $fontSize}) / 2));
+      }
+    }
+
+    h3 {
+      display: inline-block;
+      font-family: "Poppins", Arial, Helvetica, sans-serif;
+      font-weight: 400;
+      font-size: $fontSize;
+      padding: 5px $pickerHeaderMargin;
+    }
+  }
+
+  #calendar {
+    width: calc(100% - #{$pickerBodyMargin} * 2);
+    margin: $pickerBodyMargin;
+    display: grid;
+    grid-template-rows: repeat(6, 1fr);
+    gap: $calendarGap;
+
+    ul {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: $calendarGap;
+      list-style-type: none;
+      padding: 0;
+
+      li {
+        width: 100%;
+        background: $fieldBackground;
+        cursor: pointer;
+
+        span {
+          margin: 3px;
+          display: block;
+          font-family: "Poppins", Arial, Helvetica, sans-serif;
+          font-weight: 300;
+          font-size: 12px;
+        }
+
+        &[disabled] {
+          opacity: 0.5;
+          cursor: default;
+        }
+
+        &[selected] {
+          background: #9ae9a7;
+        }
+      }
+    }
+  }
+}
