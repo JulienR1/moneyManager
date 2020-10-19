@@ -19,4 +19,5 @@
             }
         ?>
     </div>
+    <button onclick="closePicker()">Fermer</button>
 </div>

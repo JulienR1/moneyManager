@@ -128,3 +128,20 @@ function updateCalendarTitle() {
   let dateStr = MONTHS[currentMonth] + " " + currentYear;
   $("#datePicker h3").html(dateStr);
 }
+
+function togglePicker(callback) {
+  if (this.callback === undefined) {
+    this.callback = callback;
+    document.getElementById("datePicker").setAttribute("enabled", "");
+  } else {
+    closePicker();
+  }
+}
+
+function closePicker() {
+  document.getElementById("datePicker").removeAttribute("enabled");
+  if (callback !== undefined) {
+    callback(selectedDate);
+    callback = undefined;
+  }
+}
