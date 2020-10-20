@@ -60,7 +60,7 @@ class NewTransaction extends Controller{
         }
     
         $success = false;
-        $fileSrc = $model->saveImg($dateStr);
+        $fileSrc = self::$model->saveImg($dateStr);
         if($fileSrc !== false){            
             if(self::$model->saveTransaction($title, $dateStr, $fileSrc, $cost, $categoryId, $isIncome)){
                 header("Location: /analytics");

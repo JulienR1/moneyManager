@@ -30,7 +30,7 @@ class m_newTransaction extends DatabaseHandler {
             if(file_exists($fullpath)){
                 return false;
             }else{
-                move_uploaded_file($fullpath);
+                move_uploaded_file($tempName, $fullpath);
                 return $fullpath;
             }
         }
