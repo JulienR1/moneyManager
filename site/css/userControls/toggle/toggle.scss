@@ -7,7 +7,7 @@
   max-width: 70px;
   position: relative;
 
-  button {
+  label {
     position: absolute;
     display: block;
     width: 100%;
@@ -35,7 +35,15 @@
     }
   }
 
-  &[toggled] button {
+  input {
+    width: 0.1px;
+    height: 0.1px;
+    opacity: 0;
+    z-index: -1;
+    position: absolute;
+  }
+
+  input:checked + label {
     background: $lightRed;
     border: 2px solid $darkRed;
 

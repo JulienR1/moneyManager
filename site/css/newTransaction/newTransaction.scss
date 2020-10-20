@@ -5,6 +5,15 @@ main {
   width: 550px;
   margin: 0 auto;
 
+  > p {
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    font-size: 14px;
+    text-align: center;
+    margin-top: 40px;
+    color: $darkRed;
+  }
+
   form {
     display: block;
     margin: 40px 0;

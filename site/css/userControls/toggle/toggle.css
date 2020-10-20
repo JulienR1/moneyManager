@@ -5,7 +5,7 @@
   position: relative;
 }
 
-#toggle button {
+#toggle label {
   position: absolute;
   display: block;
   width: 100%;
@@ -19,7 +19,7 @@
   transition: all 0.5s ease;
 }
 
-#toggle button div {
+#toggle label div {
   display: block;
   position: absolute;
   top: 50%;
@@ -34,12 +34,20 @@
   transition: all 0.5s ease;
 }
 
-#toggle[toggled] button {
+#toggle input {
+  width: 0.1px;
+  height: 0.1px;
+  opacity: 0;
+  z-index: -1;
+  position: absolute;
+}
+
+#toggle input:checked + label {
   background: #f75374;
   border: 2px solid #df1941;
 }
 
-#toggle[toggled] button div {
+#toggle input:checked + label div {
   left: 60%;
 }
 /*# sourceMappingURL=toggle.css.map */

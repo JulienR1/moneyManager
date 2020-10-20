@@ -28,21 +28,23 @@ class DatabaseHandler
         $conn = self::connect();
         $stmt = $conn->prepare($sql);
         $stmt->execute($params);
-        return filterOutput($stmt);
+        return self::filterOutput($stmt, $sql);
     }
 
     private static function queryNoStmt($sql)
     {
         $conn = self::connect();
         $dataTable = $conn->query($sql);
-        return filterOutput($dataTable);
+        return self::filterOutput($dataTable, $sql);
     }
 
     private static function filterOutput($dataTable, $sql){
         if($dataTable->rowCount() > 0){
-            switch(explode(" ", $sql[0])){
+            switch(explode(" ", $sql)[0]){
                 case "SELECT": 
                     return $dataTable->fetchAll(PDO::FETCH_ASSOC);
+                case "INSERT":
+                    return $dataTable;
                 default: break;
             }
         }

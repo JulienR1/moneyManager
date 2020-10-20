@@ -1,5 +1,6 @@
-<div id="toggle" toggled>
-    <button type="button" onclick="toggle(event)">
+<div id="toggle">
+    <input type="checkbox" id="toggleInput" name="toggleInput" onclick="toggle(event)" checked>
+    <label for="toggleInput">
         <div></div>
-    </button>
+    </label>
 </div>
