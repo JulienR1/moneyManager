@@ -9,10 +9,13 @@ let selectedDate;
 let currentMonth, currentYear;
 
 function datePickerLoad() {
+  if (document.querySelector("#datePicker") === null) return;
+
   selectedDate = new Date();
   setDatesSize();
   selectMonthOf(selectedDate);
   loadMonth();
+  registerDateClicks();
   selectDate(selectedDate);
 
   document.getElementById("datePicker").addEventListener("click", (e) => {
@@ -24,7 +27,6 @@ function datePickerLoad() {
 function loadMonth() {
   disableSelection();
   buildCalendar();
-  registerDateClicks();
   enableSelection();
   updateCalendarTitle();
 }
@@ -129,7 +131,10 @@ function updateCalendarTitle() {
   $("#datePicker h3").html(dateStr);
 }
 
-function togglePicker(callback) {
+function togglePicker(startDate, callback) {
+  startDate = new Date(startDate);
+  startDate.setDate(startDate.getDate() + 1);
+  selectDate(startDate);
   if (this.callback === undefined) {
     this.callback = callback;
     document.getElementById("datePicker").setAttribute("enabled", "");
@@ -140,8 +145,10 @@ function togglePicker(callback) {
 
 function closePicker() {
   document.getElementById("datePicker").removeAttribute("enabled");
-  if (callback !== undefined) {
+  if (this.callback !== undefined) {
     callback(selectedDate);
-    callback = undefined;
+    this.callback = undefined;
+    disableSelection();
+    selectedDate = undefined;
   }
 }

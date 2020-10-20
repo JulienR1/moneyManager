@@ -1,0 +1,45 @@
+#toggle {
+  width: 100%;
+  height: 25px;
+  max-width: 70px;
+  position: relative;
+}
+
+#toggle button {
+  position: absolute;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background: #9ae9a7;
+  border-radius: 30px;
+  outline: none;
+  border: 2px solid #5ebf6e;
+  cursor: pointer;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#toggle button div {
+  display: block;
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+          transform: translateY(-50%);
+  width: 20px;
+  height: 20px;
+  background: #fff;
+  border-radius: 50%;
+  left: 10%;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease;
+}
+
+#toggle[toggled] button {
+  background: #f75374;
+  border: 2px solid #df1941;
+}
+
+#toggle[toggled] button div {
+  left: 60%;
+}
+/*# sourceMappingURL=toggle.css.map */

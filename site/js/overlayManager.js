@@ -1,3 +1,5 @@
 document.addEventListener("click", (event) => {
-  closePicker();
+  if (document.getElementById("datePicker") !== null) {
+    closePicker();
+  }
 });

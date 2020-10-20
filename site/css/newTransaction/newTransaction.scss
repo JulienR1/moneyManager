@@ -1,0 +1,273 @@
+@import "../colors";
+@import "../variables";
+
+main {
+  width: 550px;
+  margin: 0 auto;
+
+  form {
+    display: block;
+    margin: 40px 0;
+
+    section {
+      background: #fff;
+      border: 1px solid $fieldBorder;
+      border-radius: 3px;
+      margin: 20px 0;
+      padding: 15px;
+
+      h2 {
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
+        font-weight: 400;
+        font-size: 20px;
+        text-align: center;
+        padding: 5px;
+      }
+    }
+
+    #title-section {
+      display: flex;
+      justify-content: space-evenly;
+      padding: 15px 50px;
+
+      span {
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        font-weight: 400;
+        position: relative;
+
+        &::after {
+          content: "";
+          position: absolute;
+          width: 125%;
+          height: 2px;
+          bottom: 0;
+          left: -12.5%;
+          background: $lightGreen;
+          transition: opacity $mediumDelay ease;
+        }
+
+        &:last-of-type::after {
+          background: $lightRed;
+          visibility: hidden;
+          opacity: 0;
+        }
+      }
+    }
+
+    #general-section {
+      #wrapper {
+        padding: 10px;
+
+        > div {
+          width: 100%;
+          display: flex;
+          margin: 5px 0;
+          position: relative;
+
+          input,
+          label {
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+            color: $text;
+            border: 1px solid $fieldBorder;
+            border-right: none;
+            background: $fieldBackground;
+            border-radius: 4px;
+            padding: 3px 5px;
+            cursor: pointer;
+          }
+
+          label + input {
+            width: 0.1px;
+            height: 0.1px;
+            overflow: hidden;
+            opacity: 0;
+            position: absolute;
+            z-index: -1;
+          }
+
+          .iconInput {
+            flex: 1;
+            display: flex;
+            margin: 0 5px;
+
+            input,
+            label {
+              width: 100%;
+              border-radius: 4px 0 0 4px;
+            }
+
+            span {
+              min-width: 30px;
+              text-align: center;
+              background-color: $lightGreen;
+              border: 1px solid $darkGreen;
+              border-radius: 0 4px 4px 0;
+              position: relative;
+
+              transition: all $mediumDelay ease-in-out;
+
+              i {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                color: $darkerGreen;
+                transition: color $mediumDelay ease-in-out;
+              }
+            }
+          }
+        }
+
+        > div .iconInput:first-of-type {
+          flex: 3;
+        }
+      }
+    }
+
+    #category-section {
+      ul {
+        padding: 0;
+        margin: 15px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
+        list-style-type: none;
+        position: relative;
+
+        li {
+          width: 28%;
+          position: relative;
+          margin: 3px 0;
+
+          label {
+            display: flex;
+            cursor: pointer;
+            transition: transform $shortDelay ease-in-out;
+
+            span {
+              display: block;
+              width: 30px;
+              background: $fieldBackgroundDarker;
+              border: 1px solid $fieldBorder;
+              border-radius: 4px 0 0 4px;
+              position: relative;
+              transition: all $mediumDelay ease-in-out;
+
+              i {
+                position: absolute;
+                left: 50%;
+                top: 50%;
+                transform: translate(-50%, -50%);
+                color: $text;
+                transition: color $mediumDelay ease-in;
+              }
+            }
+
+            p {
+              flex: 1;
+              border: 1px solid $fieldBorder;
+              border-radius: 0 4px 4px 0;
+              border-left: none;
+              padding: 3px 5px;
+              font-family: "Poppins", Arial, Helvetica, sans-serif;
+              font-size: 12px;
+              font-weight: 400;
+            }
+          }
+
+          input {
+            display: none;
+          }
+
+          input:checked + label {
+            transform: translateX(10px);
+
+            span {
+              background: $lightGreen;
+              border: 1px solid $darkGreen;
+
+              i {
+                color: $darkerGreen;
+              }
+            }
+          }
+        }
+      }
+
+      > div {
+        display: block;
+        text-align: center;
+
+        a {
+          text-decoration: underline;
+          color: $text;
+          font-family: "Poppins", Arial, Helvetica, sans-serif;
+          font-size: 12px;
+          font-weight: 300;
+        }
+      }
+    }
+
+    #save-section {
+      padding: 5px 0;
+
+      button {
+        display: block;
+        margin: 0 auto;
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
+        font-size: 15px;
+        font-weight: 400;
+        background: none;
+        outline: none;
+        border: none;
+        cursor: pointer;
+      }
+
+      button[disabled] {
+        opacity: 0.5;
+        cursor: default;
+      }
+    }
+  }
+
+  form[toggled] {
+    #title-section span {
+      &:last-of-type::after {
+        visibility: visible;
+        opacity: 1;
+      }
+
+      &:first-of-type::after {
+        visibility: hidden;
+        opacity: 0;
+      }
+    }
+
+    #general-section #wrapper > div .iconInput span {
+      background-color: $lightRed;
+      border: 1px solid $darkRed;
+
+      i {
+        color: $darkerRed;
+      }
+    }
+
+    #datePicker #calendar ul li[selected] {
+      background: $darkRed;
+    }
+
+    #category-section ul li input:checked + label {
+      span {
+        background: $lightRed;
+        border-color: $darkRed;
+
+        i {
+          color: $darkerRed;
+        }
+      }
+    }
+  }
+}

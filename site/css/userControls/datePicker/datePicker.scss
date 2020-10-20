@@ -1,5 +1,5 @@
-@import "../colors";
-@import "../variables";
+@import "../../colors";
+@import "../../variables";
 
 $pickerHeaderMargin: 15px;
 $pickerBodyMargin: 15px;
@@ -9,8 +9,7 @@ $calendarGap: 5px;
 
 #datePicker {
   position: absolute;
-  width: 100%;
-  min-width: 300px;
+  width: 300px;
   background: #fff;
   border-radius: 5px;
   border: $fieldBorder 1px solid;
@@ -99,7 +98,7 @@ $calendarGap: 5px;
         }
 
         &[selected] {
-          background: #9ae9a7;
+          background: $darkGreen;
         }
       }
     }

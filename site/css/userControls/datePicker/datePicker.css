@@ -1,7 +1,6 @@
 #datePicker {
   position: absolute;
-  width: 100%;
-  min-width: 300px;
+  width: 300px;
   background: #fff;
   border-radius: 5px;
   border: #a0a0a0 1px solid;
@@ -110,7 +109,7 @@
 }
 
 #datePicker #calendar ul li[selected] {
-  background: #9ae9a7;
+  background: #5ebf6e;
 }
 
 #datePicker > button {
