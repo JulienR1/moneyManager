@@ -1,7 +1,12 @@
-main section {
+main {
   width: 550px;
-  margin: 40px auto;
-  padding: 15px;
+  margin: 0 auto;
+}
+
+main section {
+  width: calc(100% - 2px);
+  margin: 40px 0;
+  padding: 15px 0;
   background: #fff;
   border: 1px solid #a0a0a0;
   border-radius: 4px;
@@ -108,7 +113,7 @@ main #category-section ul li:last-of-type {
 
 main #edition-section {
   text-align: center;
-  padding: 30px 15px;
+  padding: 30px 0;
 }
 
 main #edition-section input {

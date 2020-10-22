@@ -6,7 +6,7 @@ Route::set("index.php", function(){
 });
 
 Route::set("analytics", function(){
-    echo "analytics";
+    Analytics::CreateView("analytics");
 });
 
 Route::set("new", function(){
