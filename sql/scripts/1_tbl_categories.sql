@@ -1,6 +1,0 @@
-CREATE TABLE `categories`(
-	`id` INT NOT NULL AUTO_INCREMENT,
-    `title` TINYTEXT NOT NULL,
-    `icon` TINYTEXT NOT NULL,
-    PRIMARY KEY(`id`)
-);

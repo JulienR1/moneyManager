@@ -1,0 +1,255 @@
+@import "../colors";
+@import "../variables";
+
+main {
+  section {
+    width: 550px;
+    margin: 40px auto;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid $fieldBorder;
+    border-radius: 4px;
+  }
+
+  #category-section {
+    h2 {
+      font-family: "Poppins", Arial, Helvetica, sans-serif;
+      font-weight: 400;
+      font-size: 20px;
+      text-align: center;
+      padding: 5px;
+    }
+
+    ul {
+      padding: 0;
+      margin: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      list-style-type: none;
+      position: relative;
+
+      li {
+        width: 45%;
+        position: relative;
+        margin: 3px 0;
+
+        label {
+          display: flex;
+          cursor: pointer;
+          transition: transform $shortDelay ease-in-out;
+
+          span {
+            display: block;
+            width: 30px;
+            background: $fieldBackgroundDarker;
+            border: 1px solid $fieldBorder;
+            border-radius: 4px 0 0 4px;
+            position: relative;
+            transition: all $mediumDelay ease-in-out;
+
+            i {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+              color: $text;
+              transition: color $mediumDelay ease-in;
+            }
+          }
+
+          p {
+            flex: 1;
+            border: 1px solid $fieldBorder;
+            border-radius: 0 4px 4px 0;
+            border-left: none;
+            padding: 3px 5px;
+            font-family: "Poppins", Arial, Helvetica, sans-serif;
+            font-size: 12px;
+            font-weight: 400;
+          }
+        }
+
+        input {
+          display: none;
+        }
+
+        input:checked + label {
+          transform: translateX(10px);
+
+          span {
+            background: $lightBlue;
+            border: 1px solid $darkBlue;
+
+            i {
+              color: $darkerBlue;
+            }
+          }
+        }
+
+        &:last-of-type {
+          opacity: 0.75;
+        }
+      }
+    }
+  }
+
+  #edition-section {
+    text-align: center;
+    padding: 30px 15px;
+
+    input {
+      padding: 2px 5px;
+      font-family: "Poppins", Arial, Helvetica, sans-serif;
+      font-size: 13px;
+      color: $text;
+      font-weight: 400;
+      border: 1px solid $fieldBorder;
+      border-radius: 4px;
+      background: $fieldBackground;
+    }
+
+    > input {
+      transition: opacity $shortDelay ease;
+      opacity: 0.3;
+    }
+
+    > form {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height $mediumDelay ease-in-out, opacity $shortDelay ease;
+      opacity: 0.3;
+
+      ul {
+        display: flex;
+        list-style-type: none;
+        justify-content: center;
+        flex-wrap: wrap;
+        width: 70%;
+        margin: 15px auto;
+        padding: 0;
+
+        li {
+          label {
+            display: block;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: $fieldBackground;
+            border: 1px solid $fieldBorder;
+            position: relative;
+            cursor: default;
+            margin: 5px;
+          }
+
+          input {
+            display: none;
+          }
+
+          i {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 21px;
+            color: $text;
+          }
+
+          @keyframes hover {
+            0%,
+            100% {
+              transform: translateY(0);
+            }
+            50% {
+              transform: translateY(-3px);
+            }
+          }
+
+          &:checked {
+            background: red;
+          }
+        }
+      }
+
+      #id-input {
+        display: none;
+      }
+    }
+
+    > div {
+      display: block;
+      text-align: center;
+
+      a {
+        text-decoration: underline;
+        color: $text;
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 300;
+      }
+
+      form {
+        padding: 15px 0;
+        display: flex;
+        justify-content: center;
+
+        input {
+          background: #fff;
+          border-radius: 4px 0 0 4px;
+          border-right: none;
+        }
+
+        label {
+          display: block;
+          background: $fieldBackground;
+          border: 1px solid $fieldBorder;
+          border-radius: 0 4px 4px 0;
+
+          button {
+            height: 100%;
+            position: relative;
+            min-width: 30px;
+            background: none;
+            border: none;
+            cursor: pointer;
+
+            i {
+              position: absolute;
+              left: 50%;
+              top: 50%;
+              transform: translate(-50%, -50%);
+            }
+          }
+        }
+      }
+    }
+
+    &[enabled] {
+      > input {
+        opacity: 1;
+      }
+
+      form {
+        max-height: 300px;
+        opacity: 1;
+
+        ul li:hover {
+          animation: hover 1s infinite;
+
+          label {
+            cursor: pointer;
+          }
+        }
+
+        ul li input:checked + label {
+          background-color: $lightBlue;
+          border-color: $darkBlue;
+
+          i {
+            color: $darkerBlue;
+          }
+        }
+      }
+    }
+  }
+}

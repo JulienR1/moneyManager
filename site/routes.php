@@ -14,7 +14,7 @@ Route::set("new", function(){
 });
 
 Route::set("categories", function(){
-    echo "categories";
+    Categories::CreateView("categories");
 });
 
 // 404: Page not found

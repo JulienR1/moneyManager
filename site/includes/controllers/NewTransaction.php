@@ -10,7 +10,7 @@ class NewTransaction extends Controller{
         self::$model = new m_newTransaction();
         self::CheckForFormInputs();
 
-        self::$categories = self::$model->getCategories();
+        self::$categories = (new m_categories())->getCategories();
         self::CreateInfo();
         parent::CreateView($viewName);
     }
@@ -20,18 +20,18 @@ class NewTransaction extends Controller{
         parent::$info = new PageInfo();
         parent::$info->setTitle("MM | Ajouter une transaction");
         parent::$info->setCss("userControls/datePicker/datePicker.css", "newTransaction/newTransaction.css", "userControls/toggle/toggle.css");
-        parent::$info->setJs("userControls/datePicker.js","userControls/toggle.js","newTransactionFormChecker.js", "fileUpload.js", "newTransaction.js");
+        parent::$info->setJs("userControls/datePicker.js","userControls/toggle.js","newTransaction/newTransactionFormChecker.js", "fileUpload.js", "newTransaction/newTransaction.js");
     }
 
     public static function GetCategoriesHTML(){
         $html = "";
         for($i = 0; $i < sizeof(self::$categories); $i++){
             $html .= "<li>";
-            $html .= '<input type="radio" id="category'.$i.'" name="category" selected value="'.self::$categories[$i]["id"].'">';
+            $html .= '<input type="radio" id="category'.$i.'" name="category" value="'.self::$categories[$i]["id"].'">';
             $html .= '<label for="category'.$i.'">';
-            $html .= '<span><i class="'.self::$categories[$i]["icon"].'"></i></span>';
+            $html .= '<span><i class="'.self::$categories[$i]["iconUrl"].'"></i></span>';
             $html .= "<p>".self::$categories[$i]["title"]."</p>";
-            $html .= "</label><li>";
+            $html .= "</label></li>";
         }
         return $html;
     }

@@ -1,0 +1,5 @@
+CREATE TABLE `icons`(
+	`id` INT NOT NULL AUTO_INCREMENT,
+    `iconUrl` TINYTEXT NOT NULL,
+    PRIMARY KEY(`id`)
+)

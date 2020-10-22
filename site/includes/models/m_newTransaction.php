@@ -2,11 +2,6 @@
 
 class m_newTransaction extends DatabaseHandler {
 
-    public function getCategories(){
-        $sql = "SELECT * FROM categories";
-        return parent::query($sql);
-    }
-
     public function saveImg($dateStr){
         if(!empty($_FILES["proof"]["name"])){
             

@@ -1,0 +1,291 @@
+main section {
+  width: 550px;
+  margin: 40px auto;
+  padding: 15px;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+  border-radius: 4px;
+}
+
+main #category-section h2 {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-weight: 400;
+  font-size: 20px;
+  text-align: center;
+  padding: 5px;
+}
+
+main #category-section ul {
+  padding: 0;
+  margin: 15px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  list-style-type: none;
+  position: relative;
+}
+
+main #category-section ul li {
+  width: 45%;
+  position: relative;
+  margin: 3px 0;
+}
+
+main #category-section ul li label {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  cursor: pointer;
+  -webkit-transition: -webkit-transform 0.25s ease-in-out;
+  transition: -webkit-transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out;
+  transition: transform 0.25s ease-in-out, -webkit-transform 0.25s ease-in-out;
+}
+
+main #category-section ul li label span {
+  display: block;
+  width: 30px;
+  background: #ebebeb;
+  border: 1px solid #a0a0a0;
+  border-radius: 4px 0 0 4px;
+  position: relative;
+  -webkit-transition: all 0.5s ease-in-out;
+  transition: all 0.5s ease-in-out;
+}
+
+main #category-section ul li label span i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #303030;
+  -webkit-transition: color 0.5s ease-in;
+  transition: color 0.5s ease-in;
+}
+
+main #category-section ul li label p {
+  -webkit-box-flex: 1;
+      -ms-flex: 1;
+          flex: 1;
+  border: 1px solid #a0a0a0;
+  border-radius: 0 4px 4px 0;
+  border-left: none;
+  padding: 3px 5px;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+main #category-section ul li input {
+  display: none;
+}
+
+main #category-section ul li input:checked + label {
+  -webkit-transform: translateX(10px);
+          transform: translateX(10px);
+}
+
+main #category-section ul li input:checked + label span {
+  background: #55f4fa;
+  border: 1px solid #55c0fa;
+}
+
+main #category-section ul li input:checked + label span i {
+  color: #0481c4;
+}
+
+main #category-section ul li:last-of-type {
+  opacity: 0.75;
+}
+
+main #edition-section {
+  text-align: center;
+  padding: 30px 15px;
+}
+
+main #edition-section input {
+  padding: 2px 5px;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 13px;
+  color: #303030;
+  font-weight: 400;
+  border: 1px solid #a0a0a0;
+  border-radius: 4px;
+  background: #f5f5f5;
+}
+
+main #edition-section > input {
+  -webkit-transition: opacity 0.25s ease;
+  transition: opacity 0.25s ease;
+  opacity: 0.3;
+}
+
+main #edition-section > form {
+  max-height: 0;
+  overflow: hidden;
+  -webkit-transition: max-height 0.5s ease-in-out, opacity 0.25s ease;
+  transition: max-height 0.5s ease-in-out, opacity 0.25s ease;
+  opacity: 0.3;
+}
+
+main #edition-section > form ul {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  list-style-type: none;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  width: 70%;
+  margin: 15px auto;
+  padding: 0;
+}
+
+main #edition-section > form ul li label {
+  display: block;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: #f5f5f5;
+  border: 1px solid #a0a0a0;
+  position: relative;
+  cursor: default;
+  margin: 5px;
+}
+
+main #edition-section > form ul li input {
+  display: none;
+}
+
+main #edition-section > form ul li i {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  font-size: 21px;
+  color: #303030;
+}
+
+@-webkit-keyframes hover {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-3px);
+            transform: translateY(-3px);
+  }
+}
+
+@keyframes hover {
+  0%,
+  100% {
+    -webkit-transform: translateY(0);
+            transform: translateY(0);
+  }
+  50% {
+    -webkit-transform: translateY(-3px);
+            transform: translateY(-3px);
+  }
+}
+
+main #edition-section > form ul li:checked {
+  background: red;
+}
+
+main #edition-section > form #id-input {
+  display: none;
+}
+
+main #edition-section > div {
+  display: block;
+  text-align: center;
+}
+
+main #edition-section > div a {
+  text-decoration: underline;
+  color: #303030;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 300;
+}
+
+main #edition-section > div form {
+  padding: 15px 0;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main #edition-section > div form input {
+  background: #fff;
+  border-radius: 4px 0 0 4px;
+  border-right: none;
+}
+
+main #edition-section > div form label {
+  display: block;
+  background: #f5f5f5;
+  border: 1px solid #a0a0a0;
+  border-radius: 0 4px 4px 0;
+}
+
+main #edition-section > div form label button {
+  height: 100%;
+  position: relative;
+  min-width: 30px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+main #edition-section > div form label button i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+}
+
+main #edition-section[enabled] > input {
+  opacity: 1;
+}
+
+main #edition-section[enabled] form {
+  max-height: 300px;
+  opacity: 1;
+}
+
+main #edition-section[enabled] form ul li:hover {
+  -webkit-animation: hover 1s infinite;
+          animation: hover 1s infinite;
+}
+
+main #edition-section[enabled] form ul li:hover label {
+  cursor: pointer;
+}
+
+main #edition-section[enabled] form ul li input:checked + label {
+  background-color: #55f4fa;
+  border-color: #55c0fa;
+}
+
+main #edition-section[enabled] form ul li input:checked + label i {
+  color: #0481c4;
+}
+/*# sourceMappingURL=categories.css.map */

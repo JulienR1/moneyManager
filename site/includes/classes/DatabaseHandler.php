@@ -45,6 +45,8 @@ class DatabaseHandler
                     return $dataTable->fetchAll(PDO::FETCH_ASSOC);
                 case "INSERT":
                     return $dataTable;
+                case "UPDATE":
+                    return $dataTable;
                 default: break;
             }
         }
