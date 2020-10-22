@@ -14,6 +14,10 @@ function onCategoriesLoaded() {
 }
 
 function onInputChange(event) {
+  if (currentIconValue !== -1) {
+    saveData();
+  }
+
   editionSection.setAttribute("enabled", "");
   categoryIdInput.value = event.target.value;
 
@@ -63,10 +67,15 @@ function saveData() {
 
 function onSaveSuccess(data) {
   if (data["success"] === true) {
+    let checkedCategoryId = $("#category-section  input:checked").val();
     setTimeout(() => {
       var categoryList = $("#category-section ul");
       var newCategoryHTML = "<li>" + categoryList.find("li").last().html() + "</li>";
       categoryList.html(data["html"] + newCategoryHTML);
+
+      if (checkedCategoryId !== undefined) {
+        $("#category-section input[value='" + checkedCategoryId + "']").get(0).checked = true;
+      }
       $("#category-section :input").change(onInputChange);
     }, 400);
   } else {
