@@ -293,4 +293,16 @@ main #edition-section[enabled] form ul li input:checked + label {
 main #edition-section[enabled] form ul li input:checked + label i {
   color: #0481c4;
 }
+
+@media screen and (max-width: 600px) {
+  main {
+    width: 350px;
+  }
+  main #category-section h2 {
+    font-size: 16px;
+  }
+  main #edition-section > form ul {
+    width: 85%;
+  }
+}
 /*# sourceMappingURL=categories.css.map */

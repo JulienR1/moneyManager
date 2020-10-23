@@ -300,4 +300,34 @@ main form[toggled] #category-section ul li input:checked + label span {
 main form[toggled] #category-section ul li input:checked + label span i {
   color: #cb1036;
 }
+
+@media screen and (max-width: 600px) {
+  #toggle {
+    height: 20px !important;
+    max-width: 60px !important;
+  }
+  #datePicker {
+    width: 250px;
+  }
+  main {
+    width: 350px;
+  }
+  main form section h2 {
+    font-size: 16px;
+  }
+  main form #title-section {
+    padding: 15px 0;
+  }
+  main form #title-section span {
+    font-size: 14px;
+  }
+  main form #category-section ul li {
+    width: 45%;
+  }
+  main form #general-section #wrapper > div .iconInput {
+    -webkit-box-flex: 2;
+        -ms-flex: 2;
+            flex: 2;
+  }
+}
 /*# sourceMappingURL=newTransaction.css.map */

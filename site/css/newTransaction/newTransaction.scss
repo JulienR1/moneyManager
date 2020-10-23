@@ -281,3 +281,38 @@ main {
     }
   }
 }
+
+@media screen and (max-width: 600px) {
+  #toggle {
+    height: 20px !important;
+    max-width: 60px !important;
+  }
+
+  #datePicker {
+    width: 250px;
+  }
+
+  main {
+    width: 350px;
+
+    form section h2 {
+      font-size: 16px;
+    }
+
+    form #title-section {
+      padding: 15px 0;
+
+      span {
+        font-size: 14px;
+      }
+    }
+
+    form #category-section ul li {
+      width: 45%;
+    }
+
+    form #general-section #wrapper > div .iconInput {
+      flex: 2;
+    }
+  }
+}
