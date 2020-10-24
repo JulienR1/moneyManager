@@ -316,3 +316,19 @@ main {
     }
   }
 }
+
+@media screen and (max-width: 400px) {
+  main {
+    width: 300px;
+
+    form section {
+      padding: 15px 0;
+    }
+
+    form #general-section #wrapper > div input,
+    form #general-section #wrapper > div label,
+    form #category-section ul li label p {
+      font-size: 10px;
+    }
+  }
+}

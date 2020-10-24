@@ -330,4 +330,18 @@ main form[toggled] #category-section ul li input:checked + label span i {
             flex: 2;
   }
 }
+
+@media screen and (max-width: 400px) {
+  main {
+    width: 300px;
+  }
+  main form section {
+    padding: 15px 0;
+  }
+  main form #general-section #wrapper > div input,
+  main form #general-section #wrapper > div label,
+  main form #category-section ul li label p {
+    font-size: 10px;
+  }
+}
 /*# sourceMappingURL=newTransaction.css.map */

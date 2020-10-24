@@ -305,4 +305,10 @@ main #edition-section[enabled] form ul li input:checked + label i {
     width: 85%;
   }
 }
+
+@media screen and (max-width: 400px) {
+  main {
+    width: 300px;
+  }
+}
 /*# sourceMappingURL=categories.css.map */

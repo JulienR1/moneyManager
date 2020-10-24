@@ -73,4 +73,11 @@ header ul li:hover::after {
   opacity: 1;
   visibility: visible;
 }
+
+@media screen and (max-width: 400px) {
+  header {
+    width: calc(100% - 40px);
+    padding: 0 20px;
+  }
+}
 /*# sourceMappingURL=header.css.map */
