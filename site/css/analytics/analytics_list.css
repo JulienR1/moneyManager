@@ -1,0 +1,115 @@
+#list table,
+#list tbody {
+  width: 100%;
+}
+
+#list tr {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 70px 1fr 1fr 100px;
+      grid-template-columns: 70px 1fr 1fr 100px;
+}
+
+#list tr:first-child {
+  margin-bottom: 5px;
+}
+
+#list tr:not(:first-child) {
+  padding: 1px;
+}
+
+#list tr:not(:first-child):nth-child(odd) {
+  background-color: #f5f5f5;
+}
+
+#list tr:not(:first-child):hover {
+  padding: 0;
+  border: 1px solid #a0a0a0;
+}
+
+#list tr[isincome="0"] td:nth-of-type(3) {
+  color: #cb1036;
+  font-weight: 400;
+}
+
+#list tr[isincome="1"] td:nth-of-type(3) {
+  color: #41984f;
+  font-weight: 400;
+}
+
+#list tr[onclick] {
+  cursor: pointer;
+}
+
+#list th,
+#list td {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  color: #303030;
+  font-size: 12px;
+  text-align: center;
+}
+
+#list th {
+  font-weight: 600;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+}
+
+#list th .title,
+#list th .filter {
+  display: inline-block;
+  position: relative;
+  padding: 0 2px;
+  cursor: pointer;
+}
+
+#list th .title i,
+#list th .filter i {
+  position: absolute;
+  -webkit-transform: translateY(-80%);
+          transform: translateY(-80%);
+  opacity: 0.4;
+}
+
+#list th .title[state="1"] i:first-child,
+#list th .filter[state="1"] i:first-child {
+  opacity: 1;
+}
+
+#list th .title[state="2"] i:last-child,
+#list th .filter[state="2"] i:last-child {
+  opacity: 1;
+}
+
+#list td {
+  font-weight: 300;
+}
+
+#list td i {
+  font-size: 15px;
+}
+
+@media screen and (max-width: 600px) {
+  #list tr {
+    -ms-grid-columns: 60px 1fr 1fr 70px;
+        grid-template-columns: 60px 1fr 1fr 70px;
+  }
+  #list th,
+  #list td {
+    font-size: 11px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  #list tr {
+    -ms-grid-columns: 45px 1fr 1fr 70px;
+        grid-template-columns: 45px 1fr 1fr 70px;
+  }
+  #list th,
+  #list td {
+    font-size: 10px;
+  }
+}
+/*# sourceMappingURL=analytics_list.css.map */

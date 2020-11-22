@@ -1,0 +1,36 @@
+main {
+  width: 550px;
+  margin: 0 auto;
+  position: relative;
+}
+
+main section {
+  width: calc(100% - 30px);
+  display: block;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+  border-radius: 3px;
+  margin: 20px 0;
+  padding: 15px;
+  position: relative;
+}
+
+main #pieSection {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 50% 50%;
+      grid-template-columns: 50% 50%;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  main {
+    width: 300px;
+  }
+}
+/*# sourceMappingURL=analytics.css.map */

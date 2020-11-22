@@ -11,6 +11,12 @@
 
     <title><?php echo static::$info->title; ?></title>
 
+    <?php 
+    foreach(static::$info->libraries as $lib){
+        echo '<script src="'.$lib.'"></script>';
+    }
+    ?>
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/df8eedba6f.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
