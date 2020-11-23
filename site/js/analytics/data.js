@@ -16,12 +16,12 @@ function loadData(e) {
     e.preventDefault();
   }
 
-  filterListData = getDates();
-  filterListData["ajax_request"] = true;
+  data = getDates();
+  data["ajax_request"] = true;
   $.ajax({
     type: "POST",
     url: "#",
-    data: $.param(filterListData),
+    data: $.param(data),
     success: onLoadSuccess,
     error: function () {
       alert("Error loading analytics");
