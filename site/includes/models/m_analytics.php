@@ -10,4 +10,12 @@ class m_analytics extends DatabaseHandler{
         return parent::query($sql, $startDate, $endDate);
     }
 
+    public function LoadCategoryData($startDate, $endDate){
+        $sql = 'SELECT categoryId, SUM(amount) AS total, COUNT(amount) as count, categories.title, iconUrl, color
+                FROM transactions, categories, icons
+                WHERE categoryId = categories.id AND iconId = icons.id AND transactionDate BETWEEN ? AND ?
+                GROUP BY categoryId';
+        return parent::query($sql, $startDate, $endDate);
+    }
+
 }

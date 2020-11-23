@@ -28,7 +28,9 @@ class Analytics extends Controller {
         }
 
         $model = new m_analytics();
-        $data = $model->LoadAllData($_POST["start"], $_POST["end"]);        
+        $data = array();
+        $data["completeData"] = $model->LoadAllData($_POST["start"], $_POST["end"]);
+        $data["categoryData"] = $model->LoadCategoryData($_POST["start"], $_POST["end"]);
         echo json_encode($data);
     }
 }

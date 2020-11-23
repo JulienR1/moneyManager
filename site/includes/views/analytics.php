@@ -9,9 +9,11 @@
 
 <section id="pieSection">
     <div>
+        <h3>Transactions par catégorie</h3>
         <canvas id="categorySumChart"></canvas>
     </div>
     <div>
+        <h3>Total par catégorie</h3>
         <canvas id="categoryAmountChart"></canvas>
     </div>
 </section>

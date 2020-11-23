@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 let completeData = [];
+let categoryData = [];
 
 function getDates() {
   var startDate = $("#startDate").val();
@@ -36,7 +37,9 @@ function onLoadSuccess(data) {
     return;
   }
 
-  completeData = JSON.parse(data);
+  var parsedData = JSON.parse(data);
+  completeData = parsedData.completeData;
+  categoryData = parsedData.categoryData;
   buildAnalytics();
 }
 
@@ -46,7 +49,50 @@ function buildAnalytics() {
 }
 
 function rebuildCircularDiagrams() {
-  //TODO
+  emptyChart(categorySumChart);
+  emptyChart(categoryAmountChart);
+
+  var data = getCategoryDatasets();
+  setChartData(categoryAmountChart, data.labels, data.sum);
+  setChartData(categorySumChart, data.labels, data.count);
+
+  categorySumChart.update();
+  categoryAmountChart.update();
+}
+
+function emptyChart(chart) {
+  chart.data.labels = [];
+  chart.data.datasets = [];
+}
+
+function setChartData(chart, labels, data) {
+  chart.data.labels = labels;
+  chart.data.datasets.push(data);
+}
+
+function getCategoryDatasets() {
+  let labels = [];
+  let sumDataset = {
+    label: "Sum",
+    backgroundColor: [],
+    data: [],
+  };
+  let countDataset = {
+    label: "Count",
+    backgroundColor: [],
+    data: [],
+  };
+
+  categoryData.forEach((data) => {
+    var label = "<i class='" + data.iconUrl + "'></i>" + data.title;
+    labels.push(label);
+    sumDataset.data.push((Math.round(data.total * 100) / 100).toFixed(2));
+    sumDataset.backgroundColor.push("#" + data.color);
+    countDataset.data.push(data.count);
+    countDataset.backgroundColor.push("#" + data.color);
+  });
+
+  return { labels: labels, sum: sumDataset, count: countDataset };
 }
 
 function filterListData(filterData) {
