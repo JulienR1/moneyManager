@@ -1,16 +1,22 @@
 document.addEventListener("DOMContentLoaded", () => {
-  var dates = getDates();
-  loadData(dates);
+  loadData(null);
+  $("form").on("submit", loadData);
 });
-//TODO: event quand les dates de filtres sont changees
 
 let completeData = [];
 
 function getDates() {
-  return { start: "2020-10-01", end: "2020-12-31" };
+  var startDate = $("#startDate").val();
+  var endDate = $("#endDate").val();
+  return { start: startDate, end: endDate };
 }
 
-function loadData(filterListData) {
+function loadData(e) {
+  if (e !== null) {
+    e.preventDefault();
+  }
+
+  filterListData = getDates();
   filterListData["ajax_request"] = true;
   $.ajax({
     type: "POST",
@@ -25,8 +31,8 @@ function loadData(filterListData) {
 
 function onLoadSuccess(data) {
   if (data.length === 0) {
-    // TODO: Set invalid request on screen
     console.log("invalid ajax request");
+    rebuildList(null);
     return;
   }
 
@@ -68,9 +74,13 @@ function rebuildList(data) {
   emptyTable(table);
 
   var innerHtml = "";
-  data.forEach((row) => {
-    innerHtml += getRowHtml(row);
-  });
+  if (data !== null) {
+    data.forEach((row) => {
+      innerHtml += getRowHtml(row);
+    });
+  } else {
+    innerHtml = "<tr><td completeSpan>Requête invalide, aucune donnée téléchargée</td></tr>";
+  }
   $(table).find("tbody").append(innerHtml);
 }
 

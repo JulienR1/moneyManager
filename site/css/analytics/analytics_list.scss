@@ -51,6 +51,11 @@ $filterDisabledOpacity: 0.4;
     text-align: center;
   }
 
+  td[completeSpan] {
+    grid-column: 1 / -1;
+    pointer-events: none;
+  }
+
   th {
     font-weight: 600;
     user-select: none;

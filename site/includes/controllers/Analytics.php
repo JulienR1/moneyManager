@@ -19,7 +19,7 @@ class Analytics extends Controller {
         parent::$info->setTitle("MM | Stats!");
         parent::$info->setLibraries('https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js');
         parent::$info->setJs("analytics/charts.js", "analytics/filters.js", "analytics/data.js");
-        parent::$info->setCss("analytics/analytics.css", "analytics/analytics_list.css  ");
+        parent::$info->setCss("analytics/analytics.css", "analytics/analytics_list.css");
     }
 
     private static function LoadData(){

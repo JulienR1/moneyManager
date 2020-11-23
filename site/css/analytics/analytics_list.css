@@ -49,6 +49,11 @@
   text-align: center;
 }
 
+#list td[completeSpan] {
+  grid-column: 1 / -1;
+  pointer-events: none;
+}
+
 #list th {
   font-weight: 600;
   -webkit-user-select: none;

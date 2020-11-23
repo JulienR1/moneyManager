@@ -1,3 +1,12 @@
+<section id="dateSelection">
+    <form>
+        <!-- TODO: Remplacer par datepicker -->
+        <input type="text" name="startDate" id="startDate" value="<?php echo date('Y-m-01'); ?>">
+        <input type="text" name="endDate" id="endDate" value="<?php echo date("Y-m-t");?>">
+        <button>Reload data</button>
+    </form>
+</section>
+
 <section id="pieSection">
     <div>
         <canvas id="categorySumChart"></canvas>
