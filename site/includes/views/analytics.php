@@ -16,6 +16,9 @@
         <h3>Total par catégorie</h3>
         <canvas id="categoryAmountChart"></canvas>
     </div>
+    <div id="chartjs-tooltip">
+        <table></table>
+    </div>
 </section>
 
 <section id="list">

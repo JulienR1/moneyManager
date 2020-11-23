@@ -84,7 +84,7 @@ function getCategoryDatasets() {
   };
 
   categoryData.forEach((data) => {
-    var label = "<i class='" + data.iconUrl + "'></i>" + data.title;
+    var label = "<i class='" + data.iconUrl + "'></i><span>" + data.title;
     labels.push(label);
     sumDataset.data.push((Math.round(data.total * 100) / 100).toFixed(2));
     sumDataset.backgroundColor.push("#" + data.color);
