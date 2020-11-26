@@ -1,0 +1,77 @@
+main {
+  width: 550px;
+  margin: 0 auto;
+  position: relative;
+
+  section {
+    width: calc(100% - 30px);
+    display: block;
+    background: #fff;
+    border: 1px solid #a0a0a0;
+    border-radius: 3px;
+    margin: 20px 0;
+    padding: 15px;
+    position: relative;
+  }
+
+  #pieSection {
+    display: grid;
+    grid-template-columns: 50% 50%;
+
+    h3 {
+      font-family: "Poppins", Arial, Helvetica, sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    #chartjs-tooltip {
+      opacity: 1;
+      position: absolute;
+      background: rgba(0, 0, 0, 0.7);
+      color: white;
+      border-radius: 3px;
+      font-size: 13px;
+      width: 100px;
+
+      transition: all 0.1s ease;
+      pointer-events: none;
+      transform: translate(-50%, 0);
+
+      i {
+        font-size: 14px;
+      }
+
+      span {
+        padding-left: 5px;
+        color: #fff;
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    width: 350px;
+  }
+
+  #pieSection div:nth-of-type(2) h3 {
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
+
+  main #pieSection #chartjs-tooltip {
+    font-size: 11px;
+
+    i {
+      font-size: 12px;
+    }
+  }
+}
+
+@media screen and (max-width: 400px) {
+  main {
+    width: 300px;
+  }
+}

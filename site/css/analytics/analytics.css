@@ -1,0 +1,78 @@
+main {
+  width: 550px;
+  margin: 0 auto;
+  position: relative;
+}
+
+main section {
+  width: calc(100% - 30px);
+  display: block;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+  border-radius: 3px;
+  margin: 20px 0;
+  padding: 15px;
+  position: relative;
+}
+
+main #pieSection {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 50% 50%;
+      grid-template-columns: 50% 50%;
+}
+
+main #pieSection h3 {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
+main #pieSection #chartjs-tooltip {
+  opacity: 1;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.7);
+  color: white;
+  border-radius: 3px;
+  font-size: 13px;
+  width: 100px;
+  -webkit-transition: all 0.1s ease;
+  transition: all 0.1s ease;
+  pointer-events: none;
+  -webkit-transform: translate(-50%, 0);
+          transform: translate(-50%, 0);
+}
+
+main #pieSection #chartjs-tooltip i {
+  font-size: 14px;
+}
+
+main #pieSection #chartjs-tooltip span {
+  padding-left: 5px;
+  color: #fff;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    width: 350px;
+  }
+  #pieSection div:nth-of-type(2) h3 {
+    margin-top: 10px;
+    margin-bottom: 14px;
+  }
+  main #pieSection #chartjs-tooltip {
+    font-size: 11px;
+  }
+  main #pieSection #chartjs-tooltip i {
+    font-size: 12px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  main {
+    width: 300px;
+  }
+}
+/*# sourceMappingURL=analytics.css.map */
