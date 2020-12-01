@@ -3,27 +3,27 @@ date_default_timezone_set("America/Toronto");
 ?>
 
 <?php
-    if(isset($_GET["error"])){
-        echo "<p>";
-        switch($_GET["error"]){
-            case "emptyfields":
-                echo "Erreur: Renseigner tous les champs";
+if (isset($_GET["error"])) {
+    echo "<p>";
+    switch ($_GET["error"]) {
+        case "emptyfields":
+            echo "Erreur: Renseigner tous les champs";
             break;
-            case "invaliddate":
-                echo "Erreur: Renseigner une date valide";
+        case "invaliddate":
+            echo "Erreur: Renseigner une date valide";
             break;
-            case "save":
-                echo "Une erreur est survenue au cours de l'enregistrement";
+        case "save":
+            echo "Une erreur est survenue au cours de l'enregistrement";
             break;
-        }
-        echo "</p>";
     }
+    echo "</p>";
+}
 ?>
 
 <form action="#" method="POST" autocomplete="off" enctype="multipart/form-data" toggled>
     <section id="title-section">
         <span>Revenu</span>
-        <?php include "includes/views/userControls/toggle.php"; ?>
+        <?php include "includes/views/userControls/toggle.php";?>
         <span>Dépense</span>
     </section>
 
@@ -32,18 +32,18 @@ date_default_timezone_set("America/Toronto");
         <div id="wrapper">
             <div>
                 <div class="iconInput">
-                    <input type="text"  id="title" name="title" placeholder="Titre">
+                    <input type="text" id="title" name="title" placeholder="Titre">
                     <span><i class="fas fa-signature"></i></span>
                 </div>
                 <div class="iconInput">
                     <input onclick="toggleDatePicker(event)" type="text" id="dateField" name="date" value="<?php echo date("Y-m-d"); ?>">
-                    <span><i class="fas fa-calendar-day"></i></span>                    
+                    <span><i class="fas fa-calendar-day"></i></span>
                 </div>
             </div>
             <div>
                 <div class="iconInput">
                     <label for="proofStr">Sélectionner un fichier</label>
-                    <input type="file" name="proof" id="proofStr" accept="image/*">
+                    <input type="file" name="proof" id="proofStr" accept="image/*;capture=camera">
                     <span><i class="fas fa-file-import"></i></span>
                 </div>
                 <div class="iconInput">
@@ -68,5 +68,5 @@ date_default_timezone_set("America/Toronto");
         <button disabled type="submit" name="save-button">Enregistrer</button>
     </section>
 
-    <?php require "includes/views/userControls/datepicker.php"; ?>
+    <?php require "includes/views/userControls/datepicker.php";?>
 </form>

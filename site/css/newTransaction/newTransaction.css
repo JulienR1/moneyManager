@@ -112,12 +112,14 @@ main form #general-section #wrapper > div .iconInput {
   display: -ms-flexbox;
   display: flex;
   margin: 0 5px;
+  overflow: hidden;
 }
 
 main form #general-section #wrapper > div .iconInput input,
 main form #general-section #wrapper > div .iconInput label {
   width: 100%;
   border-radius: 4px 0 0 4px;
+  overflow: hidden;
 }
 
 main form #general-section #wrapper > div .iconInput span {

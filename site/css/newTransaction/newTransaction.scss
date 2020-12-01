@@ -101,11 +101,13 @@ main {
             flex: 1;
             display: flex;
             margin: 0 5px;
+            overflow: hidden;
 
             input,
             label {
               width: 100%;
               border-radius: 4px 0 0 4px;
+              overflow: hidden;
             }
 
             span {
