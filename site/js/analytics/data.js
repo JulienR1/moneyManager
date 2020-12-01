@@ -40,7 +40,14 @@ function onLoadSuccess(data) {
   var parsedData = JSON.parse(data);
   completeData = parsedData.completeData;
   categoryData = parsedData.categoryData;
+
+  renderEmptyData();
   buildAnalytics();
+}
+
+function renderEmptyData(){
+  var emptyData = completeData === null || categoryData === null;
+  document.getElementById("no-data-msg").style.display = emptyData ? "block" : "none";
 }
 
 function buildAnalytics() {
@@ -52,9 +59,11 @@ function rebuildCircularDiagrams() {
   emptyChart(categorySumChart);
   emptyChart(categoryAmountChart);
 
-  var data = getCategoryDatasets();
-  setChartData(categoryAmountChart, data.labels, data.sum);
-  setChartData(categorySumChart, data.labels, data.count);
+  if(categoryData !== null){
+    var data = getCategoryDatasets();
+    setChartData(categoryAmountChart, data.labels, data.sum);
+    setChartData(categorySumChart, data.labels, data.count);
+  }
 
   categorySumChart.update();
   categoryAmountChart.update();
@@ -125,7 +134,7 @@ function rebuildList(data) {
       innerHtml += getRowHtml(row);
     });
   } else {
-    innerHtml = "<tr><td completeSpan>Requête invalide, aucune donnée téléchargée</td></tr>";
+    innerHtml = "<tr><td completeSpan>Aucune donnée sauvegardée</td></tr>";
   }
   $(table).find("tbody").append(innerHtml);
 }

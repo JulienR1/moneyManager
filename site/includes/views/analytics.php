@@ -2,12 +2,15 @@
     <form>
         <!-- TODO: Remplacer par datepicker -->
         <input type="text" name="startDate" id="startDate" value="<?php echo date('Y-m-01'); ?>">
-        <input type="text" name="endDate" id="endDate" value="<?php echo date("Y-m-t");?>">
+        <input type="text" name="endDate" id="endDate" value="<?php echo date("Y-m-t"); ?>">
         <button>Reload data</button>
     </form>
 </section>
 
 <section id="pieSection">
+    <div id="no-data-msg">
+        <p>Aucune donnée sauvegardée</p>
+    </div>
     <div>
         <h3>Transactions par catégorie</h3>
         <canvas id="categorySumChart"></canvas>
