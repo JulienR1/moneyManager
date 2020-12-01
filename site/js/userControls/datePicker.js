@@ -7,6 +7,7 @@ const MONTHS = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"
 
 let selectedDate;
 let currentMonth, currentYear;
+let currentPickerId = null;
 
 function datePickerLoad() {
   if (document.querySelector("#datePicker") === null) return;
@@ -131,10 +132,18 @@ function updateCalendarTitle() {
   $("#datePicker h3").html(dateStr);
 }
 
+function togglePickerMultiple(startDate, pickerId, callback){
+  closePicker();
+  if(currentPickerId !== pickerId){
+    togglePicker(startDate, callback);
+  }
+}
+
 function togglePicker(startDate, callback) {
   startDate = new Date(startDate);
   startDate.setDate(startDate.getDate() + 1);
   selectDate(startDate);
+
   if (this.callback === undefined) {
     this.callback = callback;
     document.getElementById("datePicker").setAttribute("enabled", "");

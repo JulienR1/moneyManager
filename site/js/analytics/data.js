@@ -1,6 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
   loadData(null);
-  $("form").on("submit", loadData);
 });
 
 let completeData = [];

@@ -1,9 +1,14 @@
 <section id="dateSelection">
     <form>
-        <!-- TODO: Remplacer par datepicker -->
-        <input type="text" name="startDate" id="startDate" value="<?php echo date('Y-m-01'); ?>">
-        <input type="text" name="endDate" id="endDate" value="<?php echo date("Y-m-t"); ?>">
-        <button>Reload data</button>
+        <div class="iconInput">
+            <label for="startDate"><i class="fas fa-calendar-day"></i></label>
+            <input onclick="toggleDatePicker(event)" type="submit" id="startDate" name="startDate" value="<?php echo date("Y-m-01"); ?>">
+        </div>
+        <div class="iconInput">
+            <label for="endDate"><i class="fas fa-calendar-check"></i></label>
+            <input onclick="toggleDatePicker(event)" type="submit" id="endDate" name="endDate" value="<?php echo date("Y-m-t"); ?>">
+        </div>
+        <?php require "includes/views/userControls/datepicker.php";?>
     </form>
 </section>
 

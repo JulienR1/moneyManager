@@ -15,6 +15,63 @@ main section {
   position: relative;
 }
 
+main #dateSelection form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+main #dateSelection form .iconInput {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+main #dateSelection form .iconInput label {
+  display: block;
+  min-width: 30px;
+  text-align: center;
+  border-radius: 4px 0 0 4px;
+  position: relative;
+  background-color: #9ae9a7;
+  border: 1px solid #5ebf6e;
+}
+
+main #dateSelection form .iconInput label i {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  -webkit-transform: translate(-50%, -50%);
+          transform: translate(-50%, -50%);
+  color: #5ebf6e;
+}
+
+main #dateSelection form .iconInput input {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  color: #303030;
+  background-color: #f5f5f5;
+  border: #a0a0a0 1px solid;
+  border-left: 0;
+  border-radius: 0 4px 4px 0;
+  padding: 3px 15px;
+  margin-right: 7px;
+  outline: none;
+  cursor: pointer;
+}
+
+main #dateSelection form .iconInput:focus-within label {
+  border-color: #41984f;
+}
+
+main #dateSelection form .iconInput:focus-within input {
+  border-color: #303030;
+}
+
 main #pieSection {
   display: -ms-grid;
   display: grid;
