@@ -113,13 +113,17 @@ main #pieSection h3 {
 }
 
 main #pieSection #chartjs-tooltip {
-  opacity: 1;
+  opacity: 0;
   position: absolute;
   background: rgba(0, 0, 0, 0.7);
   color: white;
   border-radius: 3px;
   font-size: 13px;
-  width: 100px;
+  min-width: 100px;
+  max-width: 150px;
+  width: -webkit-fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
   -webkit-transition: all 0.1s ease;
   transition: all 0.1s ease;
   pointer-events: none;
@@ -136,6 +140,37 @@ main #pieSection #chartjs-tooltip span {
   color: #fff;
 }
 
+main #pieSection > table {
+  padding-top: 20px;
+  grid-column: 1 / -1;
+  margin: 0 auto;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  color: #303030;
+}
+
+main #pieSection > table th,
+main #pieSection > table td {
+  text-align: center;
+  min-width: 60px;
+}
+
+main #pieSection > table th {
+  font-weight: 600;
+}
+
+main #pieSection > table td {
+  font-weight: 400;
+}
+
+main #pieSection > table td[ispositive="0"] {
+  color: #cb1036;
+}
+
+main #pieSection > table td[ispositive="1"] {
+  color: #41984f;
+}
+
 @media screen and (max-width: 600px) {
   main {
     width: 350px;
@@ -149,6 +184,9 @@ main #pieSection #chartjs-tooltip span {
   }
   main #pieSection #chartjs-tooltip i {
     font-size: 12px;
+  }
+  main #pieSection #chartjs-tooltip > table {
+    font-size: 10px;
   }
 }
 

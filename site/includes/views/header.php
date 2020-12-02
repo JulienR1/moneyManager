@@ -22,12 +22,12 @@ foreach (static::$info->libraries as $lib) {
     <script src="https://kit.fontawesome.com/df8eedba6f.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/general/general.css">
-    <link rel="stylesheet" href="css/general/header.css">
+    <link rel="stylesheet" href="css/general/general.css?v-<?php echo static::$importFileVersion; ?>">
+    <link rel="stylesheet" href="css/general/header.css?v=<?php echo static::$importFileVersion; ?>">
 
     <?php
 foreach (static::$info->cssFiles as $file) {
-    echo '<link rel="stylesheet" href="css/' . $file . '?v=3">';
+    echo '<link rel="stylesheet" href="css/' . $file . '?v=' . static::$importFileVersion . '">';
 }
 ?>
 </head>

@@ -22,4 +22,14 @@ class m_analytics extends DatabaseHandler
         return parent::query($sql, $startDate, $endDate);
     }
 
+    public function GetSummaryData($startDate, $endDate)
+    {
+        $sql = 'SELECT SUM(amount) AS total, COUNT(amount) AS count
+                FROM transactions
+                WHERE transactionDate BETWEEN ? AND ?
+                GROUP BY isIncome
+                ORDER BY isIncome';
+        return parent::query($sql, $startDate, $endDate);
+    }
+
 }

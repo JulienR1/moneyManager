@@ -33,6 +33,7 @@ class Analytics extends Controller
         $data = array();
         $data["completeData"] = $model->LoadAllData($_POST["start"], $_POST["end"]);
         $data["categoryData"] = $model->LoadCategoryData($_POST["start"], $_POST["end"]);
+        $data["summaryData"] = $model->GetSummaryData($_POST["start"], $_POST["end"]);
         echo json_encode($data);
     }
 }

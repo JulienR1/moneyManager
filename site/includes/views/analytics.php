@@ -27,6 +27,24 @@
     <div id="chartjs-tooltip">
         <table></table>
     </div>
+
+    <table id="summary-table">
+        <!--<tr>
+            <th>Revenus</th>
+            <th>Dépenses</th>
+            <th>Total</th>
+</tr>-->
+        <!--<tr>
+            <td>1</td>
+            <td>2</td>
+            <td>3</td>
+        </tr>
+        <tr>
+            <td ispositive=1>150$</td>
+            <td ispositive=0>200$</td>
+            <td ispositive=0>(50$)</td>
+        </tr>-->
+    </table>
 </section>
 
 <section id="list">

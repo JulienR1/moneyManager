@@ -7,6 +7,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 let completeData = [];
 let categoryData = [];
+let summaryData = [];
 
 function getDates() {
   var startDate = $("#startDate").val();
@@ -42,6 +43,7 @@ function onLoadSuccess(data) {
   var parsedData = JSON.parse(data);
   completeData = parsedData.completeData;
   categoryData = parsedData.categoryData;
+  summaryData = parsedData.summaryData;
 
   renderEmptyData();
   buildAnalytics();
@@ -55,6 +57,7 @@ function renderEmptyData(){
 function buildAnalytics() {
   rebuildCircularDiagrams();
   rebuildList(completeData);
+  rebuildSummaryTable();
 }
 
 function rebuildCircularDiagrams() {
@@ -79,8 +82,8 @@ function setChartData(chart, totalData, data, reverseOrder) {
 function getCategoryDatasets() {
   let patterns = getEmptyPatterns();
 
-  patterns.totalCountDataset.weight = 2;
-  patterns.totalSumDataset.weight = 2;
+  patterns.totalCountDataset.weight = 3;
+  patterns.totalSumDataset.weight = 3;
 
   var previousCategoryId = null;
   categoryData.forEach((data) => {
@@ -207,4 +210,25 @@ function getRowHtml(rowData) {
   html += '<td><i style="--color: #' + rowData["color"] + '" class="' + rowData["iconUrl"] + '"></i></td>';
   html += "</tr>";
   return html;
+}
+
+function rebuildSummaryTable(){
+  var revenueCount = summaryData[0] !== undefined ? parseInt(summaryData[0].count) : 0;
+  var revenueAmount = summaryData[0] !== undefined ? roundValue(parseFloat(summaryData[0].total), 2) : 0;
+  var expenseCount = summaryData[1] !== undefined ? parseInt(summaryData[1].count) : 0;
+  var expenseAmount = summaryData[1] !== undefined ? roundValue(parseFloat(summaryData[1].total), 2) : 0;
+
+  var countTotal = revenueCount + expenseCount;
+  var amountTotal = roundValue(revenueAmount - expenseAmount, 2);
+
+  let table = document.getElementById("summary-table");
+  var html = "<tr><th>Revenus</th><th>Dépenses</th><th>Total</th></tr>";
+  html += "<tr><td>"+revenueCount+"</td><td>"+expenseCount+"</td><td>"+countTotal+"</td></tr>";
+  html += "<tr><td ispositive=1>"+revenueAmount+"$</td><td ispositive=0>"+expenseAmount+"$</td><td ispositive="+(amountTotal>0?1:0)+">"+amountTotal+"$</td></tr>";
+  table.innerHTML = html;
+}
+
+function roundValue(value, precision){
+  var precisionFactor = Math.pow(10, precision);
+  return (Math.round(value * precisionFactor) / precisionFactor).toFixed(precision);
 }
