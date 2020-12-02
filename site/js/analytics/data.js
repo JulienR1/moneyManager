@@ -204,7 +204,7 @@ function getRowHtml(rowData) {
   html += '<span class="month"> ' + months[date.getMonth()] + "</span></td>";
   html += "<td>" + rowData["title"] + "</td>";
   html += "<td>" + amount + "$</td>";
-  html += '<td><i class="' + rowData["iconUrl"] + '"></i></td>';
+  html += '<td><i style="--color: #' + rowData["color"] + '" class="' + rowData["iconUrl"] + '"></i></td>';
   html += "</tr>";
   return html;
 }

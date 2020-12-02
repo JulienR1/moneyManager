@@ -5,7 +5,7 @@ class m_analytics extends DatabaseHandler
 
     public function LoadAllData($startDate, $endDate)
     {
-        $sql = 'SELECT transactionDate, transactions.title, amount, proofSrc, iconUrl, isIncome
+        $sql = 'SELECT transactionDate, transactions.title, amount, proofSrc, iconUrl, color, isIncome
                 FROM transactions, categories, icons
                 WHERE categoryId = categories.id AND iconId = icons.id AND transactionDate BETWEEN ? AND ?
                 ORDER BY transactionDate ASC';

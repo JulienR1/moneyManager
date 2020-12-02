@@ -81,11 +81,15 @@ main {
           transform: translateX(10px);
 
           span {
-            background: $lightBlue;
-            border: 1px solid $darkBlue;
+            transition: background-color ease $shortDelay;
+            background-color: var(--color);
+            border: 1px solid $text;
+            color: var(--color);
 
             i {
-              color: $darkerBlue;
+              color: inherit;
+              filter: brightness(50%);
+              transition: none;
             }
           }
         }
@@ -245,11 +249,12 @@ main {
         }
 
         ul li input:checked + label {
-          background-color: $lightBlue;
-          border-color: $darkBlue;
+          background-color: var(--color);
+          color: var(--color);
 
           i {
-            color: $darkerBlue;
+            color: inherit;
+            filter: brightness(50%);
           }
         }
       }
@@ -268,6 +273,14 @@ main {
     #edition-section {
       > form ul {
         width: 85%;
+      }
+
+      form > div {
+        padding: 0 50px;
+
+        input {
+          margin: 4px 0;
+        }
       }
     }
   }

@@ -4,13 +4,16 @@ let editionSection = document.getElementById("edition-section");
 let categoryIdInput = document.getElementById("id-input");
 
 let titleInput = $("#edition-section > form input").first();
+let colorInput = $(titleInput.next()[0]);
 
 let currentIconValue = -1;
+let currentCategoryColor = null;
 
 function onCategoriesLoaded() {
   $("#category-section :input").change(onInputChange);
   $("section").click(catchClick);
   $(document).click(deselectInputs);
+  $(colorInput).keyup(validateColorInput);
 }
 
 function onInputChange(event) {
@@ -23,21 +26,41 @@ function onInputChange(event) {
 
   let iconUrl = $(event.target.nextSibling).find("i").attr("class");
   let categoryTitle = $(event.target.nextSibling).find("p").text();
+  currentCategoryColor = $(event.target.nextSibling).attr("color");
 
   let iconList = $("#edition-section ul li");
   titleInput.val(categoryTitle);
+  colorInput.val(currentCategoryColor);
   if (iconUrl !== undefined) {
-    iconList.each(function () {
-      if ($(this).find('i[class="' + iconUrl + '"]').length > 0) {
+    iconList.each(function () {      
+      if ($(this).find('i[class="' + iconUrl + '"]').length > 0) {        
         var iconInput = $(this).find("input").get(0);
-        iconInput.checked = true;
+        iconInput.checked = true;        
         currentIconValue = iconInput.value;
-      }
+      }      
     });
+    updateCategoryIconsColor();
   } else {
-    iconList.each(function () {
-      $(this).find("input").get(0).checked = false;
+    iconList.each(function () {      
+      var iconInput = $(this).find("input").get(0);
+      iconInput.checked = false;
+      iconInput.nextSibling.style = ""      
     });
+  }
+}
+
+function updateCategoryIconsColor(){
+  document.querySelectorAll("#edition-section form li label").forEach((label)=>{
+    label.style = "--color: #" + currentCategoryColor;
+  });
+}
+
+function validateColorInput(){
+  var newColorInput = colorInput.val();
+  let regex = /^[0-9,a-f]{6}$/i;
+  if(regex.test(newColorInput)){
+    currentCategoryColor = newColorInput;
+    updateCategoryIconsColor();
   }
 }
 
@@ -62,6 +85,10 @@ function saveData() {
     url: "/categories?save=1",
     data: $("#edition-section > form").serialize(),
     success: onSaveSuccess,
+    error: function(jqXHR, textStatus, errorThrown){
+      console.log(jqXHR + '-' + textStatus + '-' + errorThrown);
+      return false;
+  }
   });
 }
 

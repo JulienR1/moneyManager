@@ -94,6 +94,7 @@
 
 #list td i {
   font-size: 15px;
+  color: var(--color);
 }
 
 @media screen and (max-width: 600px) {

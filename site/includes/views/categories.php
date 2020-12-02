@@ -15,7 +15,10 @@
 
 <section id="edition-section">
     <form method="POST" autocomplete="off" onkeydown="return event.key != 'Enter';">
-        <input type="text" name="title" placeholder="Nom">
+        <div>
+            <input type="text" name="title" placeholder="Nom">
+            <input type="text" name="color" placeholder="Couleur (HEX)">
+        </div>
         <ul>
             <?php echo static::getIconsHTML(); ?>
         </ul>

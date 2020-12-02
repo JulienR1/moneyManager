@@ -1,28 +1,34 @@
 <?php
 
-class m_categories extends DatabaseHandler{
+class m_categories extends DatabaseHandler
+{
 
-    public function getCategories(){
-        $sql = "SELECT categories.id, title, iconUrl FROM categories, icons WHERE iconId = icons.id";
+    public function getCategories()
+    {
+        $sql = "SELECT categories.id, title, iconUrl, color FROM categories, icons WHERE iconId = icons.id";
         return parent::query($sql);
     }
 
-    public function getIcons(){
+    public function getIcons()
+    {
         $sql = "SELECT * FROM icons";
         return parent::query($sql);
     }
 
-    public function saveNewCategory($title, $iconId){
-        $sql = "INSERT INTO categories (id, title, iconId) VALUES(NULL, ?, ?)";
-        return parent::query($sql, $title, $iconId);
+    public function saveNewCategory($title, $iconId, $colorHex)
+    {
+        $sql = "INSERT INTO categories (id, title, iconId, color) VALUES(NULL, ?, ?, ?)";
+        return parent::query($sql, $title, $iconId, $colorHex);
     }
 
-    public function updateCategory($categoryId, $newTitle, $newIconId){
-        $sql = "UPDATE categories SET title=?, iconId=? WHERE id=?";
-        return parent::query($sql, $newTitle, $newIconId, $categoryId);
+    public function updateCategory($categoryId, $newTitle, $newIconId, $colorHex)
+    {
+        $sql = "UPDATE categories SET title=?, iconId=?, color=? WHERE id=?";
+        return parent::query($sql, $newTitle, $newIconId, $colorHex, $categoryId);
     }
 
-    public function saveIcon($icon){
+    public function saveIcon($icon)
+    {
         $sql = "INSERT INTO icons (id, iconUrl) VALUES(NULL, ?)";
         return parent::query($sql, $icon);
     }

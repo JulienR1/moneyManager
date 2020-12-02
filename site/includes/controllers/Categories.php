@@ -47,8 +47,8 @@ class Categories extends Controller
         for ($i = 0; $i < sizeof(self::$categories); $i++) {
             $html .= "<li>";
             $html .= '<input type="radio" id="category' . $i . '" name="category" value="' . self::$categories[$i]["id"] . '">';
-            $html .= '<label for="category' . $i . '">';
-            $html .= '<span><i class="' . self::$categories[$i]["iconUrl"] . '"></i></span>';
+            $html .= '<label for="category' . $i . '" color="' . self::$categories[$i]["color"] . '">';
+            $html .= '<span style="--color: #' . self::$categories[$i]["color"] . '"><i class="' . self::$categories[$i]["iconUrl"] . '"></i></span>';
             $html .= "<p>" . self::$categories[$i]["title"] . "</p>";
             $html .= "</label></li>";
         }
@@ -72,16 +72,18 @@ class Categories extends Controller
         $response = array();
         $response["success"] = "fail";
 
-        if (isset($_POST["title"]) && isset($_POST["icon"]) && isset($_POST["categoryId"])) {
+        if (isset($_POST["title"]) && isset($_POST["icon"]) && isset($_POST["categoryId"]) && isset($_POST["color"])) {
             $title = $_POST["title"];
             $iconId = $_POST["icon"];
             $categoryId = $_POST["categoryId"];
+            $colorHex = $_POST["color"];
 
             $title = filter_var($title, FILTER_SANITIZE_STRING);
             $iconId = filter_var($iconId, FILTER_VALIDATE_INT) ? $iconId : -1;
             if ($categoryId !== "new") {
                 $categoryId = filter_var($categoryId, FILTER_VALIDATE_INT) ? $categoryId : -1;
             }
+            $colorHex = filter_var($colorHex, FILTER_SANITIZE_STRING);
 
             $titleValid = strlen($title) > 0;
 
@@ -95,12 +97,15 @@ class Categories extends Controller
                 $categoryIdValid = in_array($categoryId, self::$categories[$i]);
             }
 
-            if ($iconIdValid && $categoryIdValid && $titleValid) {
+            $hexIsValid = preg_match("/^[0-9,a-f]{6}$/i", $colorHex) == 1 ? true : false;
+            $response["hex"] = $hexIsValid;
+
+            if ($iconIdValid && $categoryIdValid && $titleValid && $hexIsValid) {
                 $saveSuccess = false;
                 if ($categoryId === "new") {
-                    $saveSuccess = self::$model->saveNewCategory($title, $iconId);
+                    $saveSuccess = self::$model->saveNewCategory($title, $iconId, $colorHex);
                 } else {
-                    $saveSuccess = self::$model->updateCategory($categoryId, $title, $iconId);
+                    $saveSuccess = self::$model->updateCategory($categoryId, $title, $iconId, $colorHex);
                 }
                 $response["success"] = $saveSuccess ? true : false;
 
