@@ -213,13 +213,18 @@ function getRowHtml(rowData) {
 }
 
 function rebuildSummaryTable(){
-  var revenueCount=0, revenueAmount=0, expenseCount=0, expenseAmount=0;
+  var revenueCount = 0, revenueAmount = 0, expenseCount = 0, expenseAmount = 0;
 
   if(summaryData !== null){
-    revenueCount = summaryData[0] !== undefined ? parseInt(summaryData[0].count) : 0;
-    revenueAmount = summaryData[0] !== undefined ? roundValue(parseFloat(summaryData[0].total), 2) : 0;
-    expenseCount = summaryData[1] !== undefined ? parseInt(summaryData[1].count) : 0;
-    expenseAmount = summaryData[1] !== undefined ? roundValue(parseFloat(summaryData[1].total), 2) : 0;
+    for(var i = 0; i < summaryData.length; i ++){
+      if(summaryData[i].isIncome == 0){
+        expenseCount = parseInt(summaryData[i].count);
+        expenseAmount = roundValue(parseFloat(summaryData[i].total), 2);
+      }else if(summaryData[i].isIncome == 1){
+        revenueCount = parseInt(summaryData[i].count);
+        revenueAmount = roundValue(parseFloat(summaryData[i].total), 2);
+      }
+    }
   }
 
   var countTotal = revenueCount + expenseCount;

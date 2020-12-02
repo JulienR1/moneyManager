@@ -24,7 +24,7 @@ class m_analytics extends DatabaseHandler
 
     public function GetSummaryData($startDate, $endDate)
     {
-        $sql = 'SELECT SUM(amount) AS total, COUNT(amount) AS count
+        $sql = 'SELECT SUM(amount) AS total, COUNT(amount) AS count, isIncome
                 FROM transactions
                 WHERE transactionDate BETWEEN ? AND ?
                 GROUP BY isIncome
