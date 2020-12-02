@@ -213,10 +213,14 @@ function getRowHtml(rowData) {
 }
 
 function rebuildSummaryTable(){
-  var revenueCount = summaryData[0] !== undefined ? parseInt(summaryData[0].count) : 0;
-  var revenueAmount = summaryData[0] !== undefined ? roundValue(parseFloat(summaryData[0].total), 2) : 0;
-  var expenseCount = summaryData[1] !== undefined ? parseInt(summaryData[1].count) : 0;
-  var expenseAmount = summaryData[1] !== undefined ? roundValue(parseFloat(summaryData[1].total), 2) : 0;
+  var revenueCount=0, revenueAmount=0, expenseCount=0, expenseAmount=0;
+
+  if(summaryData !== null){
+    revenueCount = summaryData[0] !== undefined ? parseInt(summaryData[0].count) : 0;
+    revenueAmount = summaryData[0] !== undefined ? roundValue(parseFloat(summaryData[0].total), 2) : 0;
+    expenseCount = summaryData[1] !== undefined ? parseInt(summaryData[1].count) : 0;
+    expenseAmount = summaryData[1] !== undefined ? roundValue(parseFloat(summaryData[1].total), 2) : 0;
+  }
 
   var countTotal = revenueCount + expenseCount;
   var amountTotal = roundValue(revenueAmount - expenseAmount, 2);
@@ -224,7 +228,7 @@ function rebuildSummaryTable(){
   let table = document.getElementById("summary-table");
   var html = "<tr><th>Revenus</th><th>Dépenses</th><th>Total</th></tr>";
   html += "<tr><td>"+revenueCount+"</td><td>"+expenseCount+"</td><td>"+countTotal+"</td></tr>";
-  html += "<tr><td ispositive=1>"+revenueAmount+"$</td><td ispositive=0>"+expenseAmount+"$</td><td ispositive="+(amountTotal>0?1:0)+">"+amountTotal+"$</td></tr>";
+  html += "<tr><td ispositive=1>"+revenueAmount+"$</td><td ispositive=0>"+expenseAmount+"$</td><td ispositive="+(amountTotal>=0?1:0)+">"+amountTotal+"$</td></tr>";
   table.innerHTML = html;
 }
 
