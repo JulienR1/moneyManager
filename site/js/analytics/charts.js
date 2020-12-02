@@ -62,6 +62,9 @@ let categorySumChart = new Chart(categorySumCanvas, {
     },
     tooltips: {
       enabled: false,
+      callbacks:{
+        label: labelCallback
+      }
     },
   },
 });
@@ -76,6 +79,15 @@ let categoryAmountChart = new Chart(categoryAmountCanvas, {
     },
     tooltips: {
       enabled: false,
+      callbacks:{
+        label: labelCallback
+      }
     },
   },
 });
+
+function labelCallback(tooltipItem, data){
+  var dataset = data.datasets[tooltipItem.datasetIndex];
+  var index = tooltipItem.index;
+  return dataset.labels[index] + ": " + dataset.data[index];
+}
