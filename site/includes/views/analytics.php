@@ -16,11 +16,11 @@
     <div id="no-data-msg">
         <p>Aucune donnée sauvegardée</p>
     </div>
-    <div>
+    <div class="pie-container">
         <h3>Transactions par catégorie</h3>
         <canvas id="categorySumChart"></canvas>
     </div>
-    <div>
+    <div class="pie-container">
         <h3>Total par catégorie</h3>
         <canvas id="categoryAmountChart"></canvas>
     </div>

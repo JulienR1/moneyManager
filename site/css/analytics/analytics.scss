@@ -2,7 +2,7 @@
 
 main {
   width: 550px;
-  margin: 0 auto;
+  margin: 40px auto;
   position: relative;
 
   section {
@@ -22,6 +22,7 @@ main {
 
     .iconInput {
       display: flex;
+      margin: 0 7px;
 
       label {
         display: block;
@@ -51,7 +52,7 @@ main {
         border-left: 0;
         border-radius: 0 4px 4px 0;
         padding: 3px 15px;
-        margin-right: 7px;
+        //margin-right: 7px;
         outline: none;
         cursor: pointer;
       }
@@ -80,6 +81,12 @@ main {
       font-size: 12px;
       font-weight: 300;
       display: none;
+    }
+
+    .pie-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
     }
 
     h3 {
@@ -137,5 +144,10 @@ main {
 @media screen and (max-width: 400px) {
   main {
     width: 300px;
+
+    #dateSelection form .iconInput input {
+      font-size: 10px;
+      padding: 3px 7px;
+    }
   }
 }
