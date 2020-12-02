@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,11 +12,11 @@
 
     <title><?php echo static::$info->title; ?></title>
 
-    <?php 
-    foreach(static::$info->libraries as $lib){
-        echo '<script src="'.$lib.'"></script>';
-    }
-    ?>
+    <?php
+foreach (static::$info->libraries as $lib) {
+    echo '<script src="' . $lib . '"></script>';
+}
+?>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://kit.fontawesome.com/df8eedba6f.js" crossorigin="anonymous"></script>
@@ -25,22 +26,23 @@
     <link rel="stylesheet" href="css/general/header.css">
 
     <?php
-    foreach (static::$info->cssFiles as $file) {
-        echo '<link rel="stylesheet" href="css/' . $file . '">';
-    }
-    ?>
+foreach (static::$info->cssFiles as $file) {
+    echo '<link rel="stylesheet" href="css/' . $file . '?v=3">';
+}
+?>
 </head>
+
 <body>
 
-<header>
-    <div id="logo">
-        <a href="/"><img src="assets/android-chrome-512x512.png" alt="MM"></a>
-    </div>
-    <ul>
-        <li><a href="/analytics">Stats</a></li>
-        <li><a href="/new">Ajouter</a></li>
-        <li><a href="/categories">Catégories</a></li>
-    </ul>
-</header>
+    <header>
+        <div id="logo">
+            <a href="/"><img src="assets/android-chrome-512x512.png" alt="MM"></a>
+        </div>
+        <ul>
+            <li><a href="/analytics">Stats</a></li>
+            <li><a href="/new">Ajouter</a></li>
+            <li><a href="/categories">Catégories</a></li>
+        </ul>
+    </header>
 
-<main>
+    <main>
