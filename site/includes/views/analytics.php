@@ -67,3 +67,8 @@
         </tbody>
     </table>
 </section>
+
+<section id="timeProgress">
+    <h3>Profil temporel</h3>
+    <canvas id="timeProgressChart"></canvas>
+</section>
