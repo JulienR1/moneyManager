@@ -15,6 +15,14 @@ main section {
   position: relative;
 }
 
+main section h3 {
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  text-align: center;
+  margin-bottom: 6px;
+}
+
 main #dateSelection form {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -104,14 +112,6 @@ main #pieSection .pie-container {
           justify-content: center;
 }
 
-main #pieSection h3 {
-  font-family: "Poppins", Arial, Helvetica, sans-serif;
-  font-size: 12px;
-  font-weight: 600;
-  text-align: center;
-  margin-bottom: 6px;
-}
-
 main #pieSection #chartjs-tooltip {
   opacity: 0;
   position: absolute;
@@ -175,7 +175,7 @@ main #pieSection > table td[ispositive="1"] {
   main {
     width: 350px;
   }
-  #pieSection div:nth-of-type(2) h3 {
+  section h3 {
     margin-top: 10px;
     margin-bottom: 14px;
   }

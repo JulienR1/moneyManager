@@ -58,6 +58,7 @@ function buildAnalytics() {
   rebuildCircularDiagrams();
   rebuildList(completeData);
   rebuildSummaryTable();
+  rebuildTimeProgress();
 }
 
 function rebuildCircularDiagrams() {
@@ -240,4 +241,39 @@ function rebuildSummaryTable(){
 function roundValue(value, precision){
   var precisionFactor = Math.pow(10, precision);
   return (Math.round(value * precisionFactor) / precisionFactor).toFixed(precision);
+}
+
+function rebuildTimeProgress(){
+  let color = "red";
+  let labels = [];
+  let dataset = {
+    borderColor: color,
+    pointBackgroundColor: color,
+    pointHitRadius: 3,
+    pointRadius: 4,
+    pointHoverRadius: 5,
+    lineTension: 0,
+    data: []
+  }
+
+  console.log(completeData);
+  let currentAmount = 0;
+  let lastDate = completeData[0].transactionDate;
+  completeData.forEach((data)=>{    
+    if(data.transactionDate !== lastDate){
+      dataset.data.push(currentAmount);
+      labels.push(lastDate);
+      lastDate = data.transactionDate;
+    }
+    
+    var expenseFactor = (data.isIncome == 1) ? 1 : -1;
+    currentAmount += expenseFactor * parseFloat(data.amount);    
+  });
+  dataset.data.push(currentAmount);
+  labels.push(lastDate);
+
+  progressChart.data.datasets = [];
+  progressChart.data.labels = labels;
+  progressChart.data.datasets.push(dataset);
+  progressChart.update();
 }
