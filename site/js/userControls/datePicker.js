@@ -36,7 +36,9 @@ function selectDate(date) {
   disableSelection();
   selectedDate = date;
   selectMonthOf(date);
+  buildCalendar();
   enableSelection();
+  updateCalendarTitle();
 }
 
 function selectMonthOf(date) {

@@ -5,7 +5,7 @@ function toggleDatePicker(event) {
   setPickerPosition(event.target);
 
   let currentId = event.target.id;
-  let dateStr = event.target.value;
+  let dateStr = event.target.value;  
   togglePickerMultiple(dateStr, currentId, (data) => {
     month = ((data.getMonth() + 1).toString().length == 1 ? "0" : "") + (data.getMonth() + 1);
     day = (data.getDate().toString().length == 1 ? "0" : "") + data.getDate();
