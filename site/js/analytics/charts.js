@@ -13,7 +13,7 @@ let categorySumChart = new Chart(categorySumCanvas, {
       custom: pieTooltip,
       enabled: false,
       callbacks:{
-        label: labelCallback
+        label: pieLabelCallback
       }
     },
   },
@@ -31,7 +31,7 @@ let categoryAmountChart = new Chart(categoryAmountCanvas, {
       custom: pieTooltip,
       enabled: false,
       callbacks:{
-        label: labelCallback
+        label: pieLabelCallback
       }
     },
   },
@@ -46,25 +46,64 @@ let progressChart = new Chart(progressCanvas, {
        display: false,
      },
      scales:{
-      xAxes:[{        
+      xAxes:[{
+        scaleLabel:{
+          display: true,
+          labelString: "Temps [Jours]"
+        },
         ticks:{
+          display: false,
           autoSkip: true,
-          maxTicksLimit: 6
+          maxTicksLimit: 6          
         }
       }],
       yAxes:[{
-        ticks:{
+        scaleLabel:{
+          display: true,
+          labelString: "Somme [$]"
+        },
+        ticks:{          
           beginAtZero: true,
           autoSkip: true,
           stepSize: 20
         }
-      }],
+      }],      
+    },
+    tooltips:{
+      custom: lineTooltip,
+      enabled: false,
+      callbacks:{
+        label: lineLabelCallback
+      }
+    },
+    layout:{
+      padding:{
+        right: 20
+      }
     }
   }
 });
 
-function labelCallback(tooltipItem, data){
+function pieLabelCallback(tooltipItem, data){
   var dataset = data.datasets[tooltipItem.datasetIndex];
   var index = tooltipItem.index;
   return dataset.labels[index] + ": " + dataset.data[index];
+}
+
+function lineLabelCallback(tooltipItem, data){
+  var dataset = data.datasets[tooltipItem.datasetIndex];
+  var index = tooltipItem.index;
+  
+  var total = roundValue(dataset.data[index], 2);
+  var inDepth = total < 0;
+  let tooltip =  "<span indepth=" + inDepth + ">" + total + "$</span></br><hr><div>";
+
+  let sign = "";
+  dataset.transactions[index].forEach((transaction) => {
+    sign = transaction.isIncome === "0" ? "-" : "+";
+    tooltip += transaction.title + ": <span isincome=" + transaction.isIncome +">" + sign + roundValue(transaction.amount, 2) + "$</span></br>";
+  });
+  tooltip += "</div>";
+
+  return tooltip;
 }

@@ -24,7 +24,7 @@
         <h3>Total par catégorie</h3>
         <canvas id="categoryAmountChart"></canvas>
     </div>
-    <div id="chartjs-tooltip">
+    <div id="pie-chartjs-tooltip">
         <table></table>
     </div>
 
@@ -71,4 +71,7 @@
 <section id="timeProgress">
     <h3>Profil temporel</h3>
     <canvas id="timeProgressChart"></canvas>
+    <div id="line-chartjs-tooltip">
+        <table></table>
+    </div>
 </section>

@@ -3,7 +3,7 @@
 class Controller
 {
     public static $info;
-    public static $importFileVersion = 3;
+    public static $importFileVersion = 4;
 
     public static function CreateView($viewName)
     {

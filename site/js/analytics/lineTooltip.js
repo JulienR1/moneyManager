@@ -1,5 +1,5 @@
-let pieTooltip = function (tooltip) {
-    var tooltipElement = document.getElementById("pie-chartjs-tooltip");
+let lineTooltip = function (tooltip) {
+    var tooltipElement = document.getElementById("line-chartjs-tooltip");
 
     if (tooltip.opacity === 0) {
         tooltipElement.style.opacity = 0;
@@ -29,7 +29,7 @@ let pieTooltip = function (tooltip) {
 
         bodyLines.forEach(function (body, i) {
         var colors = tooltip.labelColors[i];
-        innerHtml += '<tr><td style="color:' + colors.backgroundColor + ';">' + body + "</span></td></tr>";
+        innerHtml += '<tr><td>' + body + "</td></tr>";
         });
         innerHtml += "</tbody>";
 

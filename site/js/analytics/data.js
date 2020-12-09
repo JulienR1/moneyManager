@@ -253,22 +253,27 @@ function rebuildTimeProgress(){
     pointRadius: 4,
     pointHoverRadius: 5,
     lineTension: 0,
-    data: []
+    data: [],
+    transactions: []
   }
 
-  console.log(completeData);
   let currentAmount = 0;
+  let transactions = [];
   let lastDate = completeData[0].transactionDate;
-  completeData.forEach((data)=>{    
+  completeData.forEach((data) => {    
     if(data.transactionDate !== lastDate){
-      dataset.data.push(currentAmount);
+      dataset.transactions.push(transactions);
+      dataset.data.push(currentAmount);      
       labels.push(lastDate);
       lastDate = data.transactionDate;
+      transactions = [];
     }
     
     var expenseFactor = (data.isIncome == 1) ? 1 : -1;
-    currentAmount += expenseFactor * parseFloat(data.amount);    
+    currentAmount += expenseFactor * parseFloat(data.amount);
+    transactions.push({title: data.title, amount: data.amount, isIncome: data.isIncome});
   });
+  dataset.transactions.push(transactions);
   dataset.data.push(currentAmount);
   labels.push(lastDate);
 

@@ -19,7 +19,13 @@ class Analytics extends Controller
         parent::$info = new PageInfo();
         parent::$info->setTitle("MM | Stats!");
         parent::$info->setLibraries('https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js');
-        parent::$info->setJs("analytics/pieTooltip.js", "analytics/charts.js", "analytics/filters.js", "analytics/data.js", "userControls/datePicker.js", "analytics/datePickerManager.js");
+        parent::$info->setJs("analytics/pieTooltip.js",
+            "analytics/lineTooltip.js",
+            "analytics/charts.js",
+            "analytics/filters.js",
+            "analytics/data.js",
+            "userControls/datePicker.js",
+            "analytics/datePickerManager.js");
         parent::$info->setCss("analytics/analytics.css", "analytics/analytics_list.css", "userControls/datePicker/datePicker.css");
     }
 
