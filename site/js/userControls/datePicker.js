@@ -1,7 +1,14 @@
 $(document).ready(datePickerLoad);
 
+const ENABLED = "enabled";
 const DISABLED = "disabled";
 const SELECTED = "selected";
+
+const PICKER = "datePicker";
+const PICKER_HEADER = "#datePicker h3";
+const CALENDAR = "#calendar";
+const CALENDAR_SQUARE = "#calendar li";
+const VALID_EVENT_CLICK = "li:not([" + DISABLED + "])";
 
 const MONTHS = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
 
@@ -10,27 +17,17 @@ let currentMonth, currentYear;
 let currentPickerId = null;
 let currentSrcElement = null;
 
+let datePicker;
+
 function datePickerLoad() {
-  if (document.querySelector("#datePicker") === null) return;
+  datePicker = document.getElementById(PICKER);
+  if (datePicker === null) return;
 
   selectedDate = new Date();
   setDatesSize();
-  selectMonthOf(selectedDate);
-  loadMonth();
   registerDateClicks();
   selectDate(selectedDate);
-
-  document.getElementById("datePicker").addEventListener("click", (e) => {
-    e.preventDefault();
-    e.stopPropagation();
-  });
-}
-
-function loadMonth() {
-  disableSelection();
-  buildCalendar();
-  enableSelection();
-  updateCalendarTitle();
+  preventEvent(datePicker, "click");
 }
 
 function selectDate(date) {
@@ -42,44 +39,79 @@ function selectDate(date) {
   updateCalendarTitle();
 }
 
+function loadMonth() {
+  disableSelection();
+  buildCalendar();
+  enableSelection();
+  updateCalendarTitle();
+}
+
 function selectMonthOf(date) {
   currentMonth = date.getMonth();
   currentYear = date.getFullYear();
 }
 
 function setDatesSize() {
-  $("#calendar li").height($("#calendar li").width());
+  let calendarSquare = $(CALENDAR_SQUARE);
+  let calendarSquareWidth = calendarSquare.width();
+  calendarSquare.height(calendarSquareWidth);
 }
 
 function buildCalendar() {
   let firstDay = new Date(currentYear, currentMonth, 1);
   let lastDay = new Date(currentYear, currentMonth + 1, 0);
 
-  $("#calendar li").each(function (index) {
-    if (index >= firstDay.getDay() && index < lastDay.getDate() + firstDay.getDay()) {
-      $(this)
-        .children()
-        .html(index - firstDay.getDay() + 1);
-      $(this).get(0).removeAttribute(DISABLED);
-    } else {
-      $(this).children().html(null);
-      $(this).get(0).setAttribute(DISABLED, "");
-    }
+  $(CALENDAR_SQUARE).each(function (index) {
+    setDateSquare({
+      square: $(this),
+      index: index,
+      firstDay: firstDay,
+      lastDay: lastDay
+    });
   });
 }
 
+function setDateSquare(monthData){
+  var squareIsBeforeMonth = monthData.index < monthData.firstDay.getDay();
+  var squareIsAfterMonth = monthData.index >= monthData.lastDay.getDate() + monthData.firstDay.getDay();  
+
+  if (!squareIsBeforeMonth && !squareIsAfterMonth) {
+    var dateHtml = monthData.index - monthData.firstDay.getDay() + 1;
+    enableDateSquare(monthData.square, dateHtml);
+  } else {
+    disableDateSquare(monthData.square);
+  }
+}
+
+function enableDateSquare(square, htmlData){
+  square.children().html(htmlData);
+  square.get(0).removeAttribute(DISABLED);
+}
+
+function disableDateSquare(square){
+  square.children().html(null);
+  square.get(0).setAttribute(DISABLED, "");
+}
+
 function registerDateClicks() {
-  $("#calendar").click(function (event) {
-    if ($(event.target).is("li:not([disabled])") || $(event.target).parent().is("li:not([disabled])")) {
-      let day;
-      if ($(event.target).is("span")) {
-        day = $(event.target).text();
-      } else {
-        day = $(event.target).children().text();
-      }
-      onDateClick(day);
-    }
-  });
+  $(CALENDAR).click(registerSingleDateClickIfValid);
+}
+
+function registerSingleDateClickIfValid(event){  
+  var clickEventIsValid = $(event.target).is(VALID_EVENT_CLICK) ||
+                          $(event.target).parent().is(VALID_EVENT_CLICK);
+  if (!clickEventIsValid) return;
+
+  let day = getDayElementFromDateClick(event);
+  onDateClick(day);
+}
+
+function getDayElementFromDateClick(event){  
+  if ($(event.target).is("span")) {
+    return $(event.target).text();
+  } else {
+    return $(event.target).children().text();
+  }
 }
 
 function onDateClick(day) {
@@ -113,7 +145,7 @@ function previousMonth() {
 
 function disableSelection() {
   if (selectedDate !== undefined) {
-    let dateElement = $("#calendar li:not([disabled])").get(selectedDate.getDate() - 1);
+    let dateElement = $(CALENDAR + " " + VALID_EVENT_CLICK).get(selectedDate.getDate() - 1);
     if (dateElement !== undefined) {
       dateElement.removeAttribute(SELECTED);
     }
@@ -123,8 +155,10 @@ function disableSelection() {
 function enableSelection() {
   if (selectedDate === undefined) return;
 
-  if (selectedDate.getMonth() == currentMonth && selectedDate.getFullYear() == currentYear) {
-    $("#calendar li:not([disabled])")
+  let dateIsInMonth = selectedDate.getMonth() == currentMonth &&
+                      selectedDate.getFullYear() == currentYear;
+  if (dateIsInMonth) {
+    $(CALENDAR + " " + VALID_EVENT_CLICK)
       .get(selectedDate.getDate() - 1)
       .setAttribute(SELECTED, "");
   }
@@ -132,7 +166,7 @@ function enableSelection() {
 
 function updateCalendarTitle() {
   let dateStr = MONTHS[currentMonth] + " " + currentYear;
-  $("#datePicker h3").html(dateStr);
+  $(PICKER_HEADER).html(dateStr);
 }
 
 function togglePickerMultiple(srcElement, callback){  
@@ -151,14 +185,14 @@ function togglePicker(srcElement, callback) {
   if (this.callback === undefined) {
     this.callback = callback;
     this.currentSrcElement = srcElement;
-    document.getElementById("datePicker").setAttribute("enabled", "");
+    datePicker.setAttribute(ENABLED, "");
   } else {
     closePicker();
   }
 }
 
 function closePicker() {  
-  document.getElementById("datePicker").removeAttribute("enabled");
+  datePicker.removeAttribute(ENABLED);
   if (this.callback !== undefined) {
     callback(selectedDate, this.currentSrcElement);
     this.callback = undefined;

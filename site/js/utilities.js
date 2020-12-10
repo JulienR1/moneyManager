@@ -5,3 +5,10 @@ function isFieldCompleted(fieldSelector){
   function passRegex(field, regex){
     return regex.test($(field).val())
   }
+
+  function preventEvent(element, eventName){
+    element.addEventListener(eventName, (e) => {
+      e.stopPropagation();
+      e.preventDefault();
+    })
+  }
