@@ -24,6 +24,17 @@ main {
     }
   }
 
+  .no-data-msg {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 300;
+    display: none;
+  }
+
   #dateSelection form {
     display: flex;
     justify-content: center;
@@ -125,17 +136,6 @@ main {
   #pieSection {
     display: grid;
     grid-template-columns: 50% 50%;
-
-    #no-data-msg {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      font-family: "Poppins", Arial, Helvetica, sans-serif;
-      font-size: 12px;
-      font-weight: 300;
-      display: none;
-    }
 
     .pie-container {
       display: flex;

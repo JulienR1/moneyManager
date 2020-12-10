@@ -8,6 +8,7 @@ const MONTHS = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", "Juillet"
 let selectedDate;
 let currentMonth, currentYear;
 let currentPickerId = null;
+let currentSrcElement = null;
 
 function datePickerLoad() {
   if (document.querySelector("#datePicker") === null) return;
@@ -134,30 +135,32 @@ function updateCalendarTitle() {
   $("#datePicker h3").html(dateStr);
 }
 
-function togglePickerMultiple(startDate, pickerId, callback){
-  closePicker();
-  if(currentPickerId !== pickerId){
-    togglePicker(startDate, callback);
-  }
+function togglePickerMultiple(srcElement, callback){  
+  if(currentPickerId !== srcElement.id){
+    closePicker();
+  }  
+  togglePicker(srcElement, callback);  
 }
 
-function togglePicker(startDate, callback) {
-  startDate = new Date(startDate);
+function togglePicker(srcElement, callback) {  
+  this.currentSrcElement = srcElement;  
+  startDate = new Date(srcElement.value);
   startDate.setDate(startDate.getDate() + 1);
   selectDate(startDate);
 
   if (this.callback === undefined) {
     this.callback = callback;
+    this.currentSrcElement = srcElement;
     document.getElementById("datePicker").setAttribute("enabled", "");
   } else {
     closePicker();
   }
 }
 
-function closePicker() {
+function closePicker() {  
   document.getElementById("datePicker").removeAttribute("enabled");
   if (this.callback !== undefined) {
-    callback(selectedDate);
+    callback(selectedDate, this.currentSrcElement);
     this.callback = undefined;
     disableSelection();
     selectedDate = undefined;

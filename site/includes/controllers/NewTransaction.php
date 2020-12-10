@@ -21,7 +21,7 @@ class NewTransaction extends Controller
         parent::$info = new PageInfo();
         parent::$info->setTitle("MM | Ajouter une transaction");
         parent::$info->setCss("userControls/datePicker/datePicker.css", "newTransaction/newTransaction.css", "userControls/toggle/toggle.css");
-        parent::$info->setJs("userControls/datePicker.js", "userControls/toggle.js", "newTransaction/newTransactionFormChecker.js", "fileUpload.js", "newTransaction/newTransaction.js");
+        parent::$info->setJs("userControls/datePicker.js", "userControls/toggle.js", "newTransaction/newTransactionFormChecker.js", "fileUpload.js", "userControls/datePickerManager.js");
     }
 
     public static function GetCategoriesHTML()

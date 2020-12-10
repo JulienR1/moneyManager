@@ -195,6 +195,18 @@ main {
         font-weight: 300;
       }
 
+      p {
+        color: $darkerRed;
+        font-family: "Poppins", Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: 400;
+        transform: translateY(10px);
+
+        b {
+          font-weight: 600;
+        }
+      }
+
       form {
         padding: 15px 0;
         display: flex;

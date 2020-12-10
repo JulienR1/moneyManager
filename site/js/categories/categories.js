@@ -1,3 +1,14 @@
+const EXISTING_CATEGORIES_CONTAINER = "#category-section ul";
+const EXISTING_CATEGORIES = "#category-section :input";
+const ICON_INPUT_LIST = "#edition-section ul li";
+const EDITION_LABEL = "#edition-section form li label";
+
+const CHECKED_INPUT_ON_SAVE = "#category-section input:checked";
+const UPDATE_DELAY = 400;
+
+const ENABLED_ATTR = "enabled";
+const HEX_REGEX = /^[0-9,a-f]{6}$/i;
+
 document.addEventListener("DOMContentLoaded", onCategoriesLoaded);
 
 let editionSection = document.getElementById("edition-section");
@@ -10,56 +21,74 @@ let currentIconValue = -1;
 let currentCategoryColor = null;
 
 function onCategoriesLoaded() {
-  $("#category-section :input").change(onInputChange);
+  $(EXISTING_CATEGORIES).change(onCategoryChange);
   $("section").click(catchClick);
   $(document).click(deselectInputs);
   $(colorInput).keyup(validateColorInput);
 }
 
-function onInputChange(event) {
+function onCategoryChange(event) {
   if (currentIconValue !== -1) {
     saveData();
   }
 
-  editionSection.setAttribute("enabled", "");
+  editionSection.setAttribute(ENABLED_ATTR, "");
   categoryIdInput.value = event.target.value;
 
-  let iconUrl = $(event.target.nextSibling).find("i").attr("class");
-  let categoryTitle = $(event.target.nextSibling).find("p").text();
-  currentCategoryColor = $(event.target.nextSibling).attr("color");
+  categoryData = getCategoryData(event);
+  titleInput.val(categoryData.title);
+  colorInput.val(categoryData.color);
+  currentCategoryColor = categoryData.color;
+  
+  let iconInputList = document.querySelectorAll(ICON_INPUT_LIST);
+  iconInputList.forEach((icon) => {
+    setIconState(icon, categoryData);
+   });
+   updateCategoryIconsColor();
+}
 
-  let iconList = $("#edition-section ul li");
-  titleInput.val(categoryTitle);
-  colorInput.val(currentCategoryColor);
-  if (iconUrl !== undefined) {
-    iconList.each(function () {      
-      if ($(this).find('i[class="' + iconUrl + '"]').length > 0) {        
-        var iconInput = $(this).find("input").get(0);
-        iconInput.checked = true;        
-        currentIconValue = iconInput.value;
-      }      
-    });
-    updateCategoryIconsColor();
+function isTargetIcon(currentIcon, targetIcon){
+  return $(currentIcon).find(`i[class="${targetIcon}"]`).length > 0;
+}
+
+function setIconState(icon, categoryData){
+  let iconIsValid = categoryData.iconUrl !== undefined;  
+  if (iconIsValid && isTargetIcon(icon, categoryData.iconUrl)){
+    enableIcon(icon);
   } else {
-    iconList.each(function () {      
-      var iconInput = $(this).find("input").get(0);
-      iconInput.checked = false;
-      iconInput.nextSibling.style = ""      
-    });
+    disableIcon(icon);
   }
 }
 
+function disableIcon(icon){
+  var iconInput = $(icon).find("input").get(0);
+  iconInput.checked = false;
+  iconInput.nextSibling.style = "";;  
+}
+
+function enableIcon(icon, color){
+  var iconInput = $(icon).find("input").get(0);
+  iconInput.checked = true;
+  currentIconValue = iconInput.value;
+}
+
+function getCategoryData(onCategoryChangeEvent){
+  return {
+    iconUrl: $(onCategoryChangeEvent.target.nextSibling).find("i").attr("class"),
+    title: $(onCategoryChangeEvent.target.nextSibling).find("p").text(),
+    color: $(onCategoryChangeEvent.target.nextSibling).attr("color")
+  };
+}
+
 function updateCategoryIconsColor(){
-  document.querySelectorAll("#edition-section form li label").forEach((label)=>{
+  document.querySelectorAll(EDITION_LABEL).forEach((label)=>{
     label.style = "--color: #" + currentCategoryColor;
   });
 }
 
 function validateColorInput(){
-  var newColorInput = colorInput.val();
-  let regex = /^[0-9,a-f]{6}$/i;
-  if(regex.test(newColorInput)){
-    currentCategoryColor = newColorInput;
+  if(passRegex(colorInput, HEX_REGEX)){
+    currentCategoryColor = colorInput.val();
     updateCategoryIconsColor();
   }
 }
@@ -70,11 +99,11 @@ function catchClick(event) {
 
 function deselectInputs(event) {
   saveData();
-
-  $("#category-section :input").each(function () {
+  
+  $(EXISTING_CATEGORIES).each(function () {
     $(this).get(0).checked = false;
   });
-  editionSection.removeAttribute("enabled");
+  editionSection.removeAttribute(ENABLED_ATTR);
   categoryIdInput.value = "";
   currentIconValue = -1;
 }
@@ -85,27 +114,44 @@ function saveData() {
     url: "/categories?save=1",
     data: $("#edition-section > form").serialize(),
     success: onSaveSuccess,
-    error: function(jqXHR, textStatus, errorThrown){
-      console.log(jqXHR + '-' + textStatus + '-' + errorThrown);
-      return false;
-  }
+    error: onSaveError
   });
 }
 
 function onSaveSuccess(data) {
   if (data["success"] === true) {
-    let checkedCategoryId = $("#category-section  input:checked").val();
-    setTimeout(() => {
-      var categoryList = $("#category-section ul");
-      var newCategoryHTML = "<li>" + categoryList.find("li").last().html() + "</li>";
-      categoryList.html(data["html"] + newCategoryHTML);
-
-      if (checkedCategoryId !== undefined) {
-        $("#category-section input[value='" + checkedCategoryId + "']").get(0).checked = true;
-      }
-      $("#category-section :input").change(onInputChange);
-    }, 400);
-  } else {
+    reloadCategoryData(data);
+  } else if(!data["identicalData"]) {
     console.log("save error");
   }
+}
+
+function reloadCategoryData(data){
+  let checkedCategoryId = $(CHECKED_INPUT_ON_SAVE).val();
+  setTimeout(() => { 
+    reloadCategoryHtml(data["html"]);
+    selectPreviousCategory(checkedCategoryId);
+    $(EXISTING_CATEGORIES).change(onCategoryChange);
+   }, UPDATE_DELAY);
+}
+
+function reloadCategoryHtml(categoriesHtml){  
+  var categoryList = $(EXISTING_CATEGORIES_CONTAINER);
+  var newCategoryHtml = getNewCategoryHtml(categoryList);
+  categoryList.html(categoriesHtml + newCategoryHtml);
+}
+
+function getNewCategoryHtml(categoryList){
+  return "<li>" + categoryList.find("li").last().html() + "</li>";    
+}
+
+function selectPreviousCategory(checkedCategoryId){
+  if (checkedCategoryId !== undefined) {
+    $("#category-section input[value='" + checkedCategoryId + "']").get(0).checked = true;
+  }
+}
+
+function onSaveError(jqXHR, textStatus, errorThrown){
+  console.log(jqXHR + '-' + textStatus + '-' + errorThrown);
+  return false;
 }

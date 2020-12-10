@@ -1,3 +1,8 @@
+const ICON_LIST = "#edition-section > form ul";
+const EXISTING_ICON_ID = "#existingIconError";
+const SUCCESS_FLAG = "success";
+const DUPLICATE_FLAG = "duplicate";
+
 document.addEventListener("DOMContentLoaded", onIconsLoaded);
 
 function onIconsLoaded() {
@@ -6,7 +11,6 @@ function onIconsLoaded() {
 
 function onFormSubmit(event) {
   event.preventDefault();
-  let formInput = document.getElementById("newIconInput");
   saveIcon();
 }
 
@@ -20,17 +24,38 @@ function saveIcon() {
 }
 
 function onIconSaved(data) {
-  document.getElementById("newIconInput").value = "";
-  if (data["success"] === true) {
-    $("#edition-section > form ul").html(data["html"]);
-    if (currentIconValue !== -1) {
-      $("#edition-section > form ul li input[value='" + currentIconValue + "']").get(0).checked = true;
-    }
+  resetIconsToDefaults();
 
-    updateCategoryIconsColor();
-  } else {
-    if (data["duplicate"] == true) {
-      console.log("Icon already in DB");
-    }
+  if (data[SUCCESS_FLAG] === true) {    
+    onIconSaveSuccess(data["html"]);
+  } else if(data[DUPLICATE_FLAG] === true) {    
+    onIconSaveFail(data["icon"]);
   }
+}
+
+function resetIconsToDefaults(){
+  document.getElementById("newIconInput").value = "";
+  $(EXISTING_ICON_ID).html("");
+}
+
+function onIconSaveSuccess(iconsHtml){
+  $(ICON_LIST).html(iconsHtml);
+  keepCurrentIconSelected();
+  updateCategoryIconsColor();
+}
+
+function keepCurrentIconSelected(){
+  if (currentIconValue !== -1) {
+    var iconInput = getSpecificIcon(currentIconValue);
+    iconInput.checked = true;
+  }
+}
+
+function onIconSaveFail(duplicateIcon){
+  var iconErrorHtml = "<b>" + duplicateIcon + "</b> est déjà utilisé";
+  $(EXISTING_ICON_ID).html(iconErrorHtml);
+}
+
+function getSpecificIcon(iconId){
+  return $(`#edition-section > form ul li input[value=${iconId}]`).get(0);
 }

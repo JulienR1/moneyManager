@@ -234,6 +234,19 @@ main #edition-section > div a {
   font-weight: 300;
 }
 
+main #edition-section > div p {
+  color: #cb1036;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  -webkit-transform: translateY(10px);
+          transform: translateY(10px);
+}
+
+main #edition-section > div p b {
+  font-weight: 600;
+}
+
 main #edition-section > div form {
   padding: 15px 0;
   display: -webkit-box;

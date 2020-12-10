@@ -106,6 +106,7 @@ class Categories extends Controller
                     $saveSuccess = self::$model->saveNewCategory($title, $iconId, $colorHex);
                 } else {
                     $saveSuccess = self::$model->updateCategory($categoryId, $title, $iconId, $colorHex);
+                    $response["identicalData"] = $saveSuccess == null ? true : false;
                 }
                 $response["success"] = $saveSuccess ? true : false;
 
@@ -122,6 +123,7 @@ class Categories extends Controller
     {
         $response = array();
         $response["success"] = "fail";
+        $response["icon"] = $_POST["newIcon"];
 
         if (isset($_POST["newIcon"]) && !empty($_POST["newIcon"])) {
             $icon = filter_var($_POST["newIcon"], FILTER_SANITIZE_STRING);

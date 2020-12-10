@@ -25,7 +25,7 @@ class Analytics extends Controller
             "analytics/filters.js",
             "analytics/data.js",
             "userControls/datePicker.js",
-            "analytics/datePickerManager.js");
+            "userControls/datePickerManager.js");
         parent::$info->setCss("analytics/analytics.css", "analytics/analytics_list.css", "userControls/datePicker/datePicker.css");
     }
 

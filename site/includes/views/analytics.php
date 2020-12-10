@@ -13,7 +13,7 @@
 </section>
 
 <section id="pieSection">
-    <div id="no-data-msg">
+    <div class="no-data-msg">
         <p>Aucune donnée sauvegardée</p>
     </div>
     <div class="pie-container">
@@ -73,5 +73,8 @@
     <canvas id="timeProgressChart"></canvas>
     <div id="line-chartjs-tooltip">
         <table></table>
+    </div>
+    <div class="no-data-msg">
+        <p>Aucune donnée sauvegardée</p>
     </div>
 </section>

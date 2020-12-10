@@ -3,6 +3,7 @@ const EXPENSE_RED = "#ff2934";
 
 document.addEventListener("DOMContentLoaded", () => {
   loadData(null);
+  onPickerClosedCallback = () => { loadData(null); };
 });
 
 let completeData = [];
@@ -51,7 +52,9 @@ function onLoadSuccess(data) {
 
 function renderEmptyData(){
   var emptyData = completeData === null || categoryData === null;
-  document.getElementById("no-data-msg").style.display = emptyData ? "block" : "none";
+  document.querySelectorAll(".no-data-msg").forEach((msg)=>{
+    msg.style.display = emptyData ? "block" : "none";
+  });
 }
 
 function buildAnalytics() {
@@ -257,25 +260,27 @@ function rebuildTimeProgress(){
     transactions: []
   }
 
-  let currentAmount = 0;
-  let transactions = [];
-  let lastDate = completeData[0].transactionDate;
-  completeData.forEach((data) => {    
-    if(data.transactionDate !== lastDate){
-      dataset.transactions.push(transactions);
-      dataset.data.push(currentAmount);      
-      labels.push(lastDate);
-      lastDate = data.transactionDate;
-      transactions = [];
-    }
-    
-    var expenseFactor = (data.isIncome == 1) ? 1 : -1;
-    currentAmount += expenseFactor * parseFloat(data.amount);
-    transactions.push({title: data.title, amount: data.amount, isIncome: data.isIncome});
-  });
-  dataset.transactions.push(transactions);
-  dataset.data.push(currentAmount);
-  labels.push(lastDate);
+  if(completeData !== null){
+    let currentAmount = 0;
+    let transactions = [];
+    let lastDate = completeData[0].transactionDate;
+    completeData.forEach((data) => {    
+      if(data.transactionDate !== lastDate){
+        dataset.transactions.push(transactions);
+        dataset.data.push(currentAmount);      
+        labels.push(lastDate);
+        lastDate = data.transactionDate;
+        transactions = [];
+      }
+      
+      var expenseFactor = (data.isIncome == 1) ? 1 : -1;
+      currentAmount += expenseFactor * parseFloat(data.amount);
+      transactions.push({title: data.title, amount: data.amount, isIncome: data.isIncome});
+    });
+    dataset.transactions.push(transactions);
+    dataset.data.push(currentAmount);
+    labels.push(lastDate);
+  }
 
   progressChart.data.datasets = [];
   progressChart.data.labels = labels;

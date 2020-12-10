@@ -26,6 +26,7 @@
     </form>
     <div>
         <a href="https://fontawesome.com/" target="_blank">Font Awesome</a>
+        <p id="existingIconError"></p>
         <form id="icon-form" method="POST" autocomplete="off">
             <input type="text" name="newIcon" id="newIconInput" placeholder="Saisir nouvel icône">
             <label for="newIconInput"><button type="submit"><i class="fas fa-plus"></i></button></label>
