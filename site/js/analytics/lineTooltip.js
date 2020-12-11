@@ -1,50 +1,18 @@
-let lineTooltip = function (tooltip) {
-    var tooltipElement = document.getElementById("line-chartjs-tooltip");
+function setLineTooltipBody(tooltip, tooltipElement){
+    var titleLines = tooltip.title || [];
+    var bodyLines = tooltip.body.map(getBody);
 
-    if (tooltip.opacity === 0) {
-        tooltipElement.style.opacity = 0;
-        return;
-    }
-
-    tooltipElement.classList.remove("above", "below", "no-transform");
-    if (tooltip.yAlign) {
-        tooltipElement.classList.add(tooltip.yAlign);
-    } else {
-        tooltipElement.classList.add("no-transform");
-    }
-
-    function getBody(bodyItem) {
-        return bodyItem.lines;
-    }
-
-    if (tooltip.body) {
-        var titleLines = tooltip.title || [];
-        var bodyLines = tooltip.body.map(getBody);
-
-        var innerHtml = "<thead>";
-        titleLines.forEach(function (title) {
+    var innerHtml = "<thead>";
+    titleLines.forEach(function (title) {
         innerHtml += "<tr><th>" + title + "</th></tr>";
-        });
-        innerHtml += "</thead><tbody>";
+    });
+    innerHtml += "</thead><tbody>";
 
-        bodyLines.forEach(function (body, i) {
-        var colors = tooltip.labelColors[i];
+    bodyLines.forEach(function (body, i) {
         innerHtml += '<tr><td>' + body + "</td></tr>";
-        });
-        innerHtml += "</tbody>";
+    });
+    innerHtml += "</tbody>";
 
-        var tableRoot = tooltipElement.querySelector("table");
-        tableRoot.innerHTML = innerHtml;
-    }
-
-    var positionY = this._chart.canvas.offsetTop;
-    var positionX = this._chart.canvas.offsetLeft;
-
-    tooltipElement.style.opacity = 1;
-    tooltipElement.style.left = positionX + tooltip.caretX + "px";
-    tooltipElement.style.top = positionY + tooltip.caretY + "px";
-    tooltipElement.style.fontFamily = tooltip._bodyFontFamily;
-    tooltipElement.style.fontSize = tooltip.bodyFontSize;
-    tooltipElement.style.fontStyle = tooltip._bodyFontStyle;
-    tooltipElement.style.padding = tooltip.yPadding + "px " + tooltip.xPadding + "px";
-};
+    var tableRoot = tooltipElement.querySelector("table");
+    tableRoot.innerHTML = innerHtml;
+}

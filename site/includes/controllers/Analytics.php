@@ -19,7 +19,9 @@ class Analytics extends Controller
         parent::$info = new PageInfo();
         parent::$info->setTitle("MM | Stats!");
         parent::$info->setLibraries('https://cdn.jsdelivr.net/npm/chart.js@2.9.4/dist/Chart.min.js');
-        parent::$info->setJs("analytics/pieTooltip.js",
+        parent::$info->setJs(
+            "analytics/customTooltip.js",
+            "analytics/pieTooltip.js",
             "analytics/lineTooltip.js",
             "analytics/charts.js",
             "analytics/filters.js",

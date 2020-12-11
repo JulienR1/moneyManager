@@ -10,7 +10,9 @@ let categorySumChart = new Chart(categorySumCanvas, {
       display: false,
     },
     tooltips: {
-      custom: pieTooltip,
+      custom: function(tooltip){
+        customTooltip(tooltip, "pie-chartjs-tooltip", setPieTooltipBody, this._chart);
+      },
       enabled: false,
       callbacks:{
         label: pieLabelCallback
@@ -28,7 +30,9 @@ let categoryAmountChart = new Chart(categoryAmountCanvas, {
       display: false,
     },
     tooltips: {
-      custom: pieTooltip,
+      custom: function(tooltip){
+        customTooltip(tooltip, "pie-chartjs-tooltip", setPieTooltipBody, this._chart);
+      },
       enabled: false,
       callbacks:{
         label: pieLabelCallback
@@ -70,7 +74,9 @@ let progressChart = new Chart(progressCanvas, {
       }],      
     },
     tooltips:{
-      custom: lineTooltip,
+      custom: function(tooltip) { 
+        customTooltip(tooltip, "line-chartjs-tooltip", setLineTooltipBody, this._chart); 
+      },
       enabled: false,
       callbacks:{
         label: lineLabelCallback
