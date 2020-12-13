@@ -22,7 +22,7 @@ foreach (static::$info->libraries as $lib) {
     <script src="https://kit.fontawesome.com/df8eedba6f.js" crossorigin="anonymous"></script>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 
-    <link rel="stylesheet" href="css/general/general.css?v-<?php echo static::$importFileVersion; ?>">
+    <link rel="stylesheet" href="css/general/general.css?v=<?php echo static::$importFileVersion; ?>">
     <link rel="stylesheet" href="css/general/header.css?v=<?php echo static::$importFileVersion; ?>">
 
     <?php
@@ -38,11 +38,35 @@ foreach (static::$info->cssFiles as $file) {
         <div id="logo">
             <a href="/"><img src="assets/android-chrome-512x512.png" alt="MM"></a>
         </div>
+
+        <?php
+if (!isset($_SESSION["connected"]) || !$_SESSION["connected"]) {
+    echo '<ul><li><a href="login">Se connecter</a></li></ul>';
+    echo "</header><main>";
+    return;
+}
+?>
+
         <ul>
             <li><a href="/analytics">Stats</a></li>
             <li><a href="/new">Ajouter</a></li>
             <li><a href="/categories">Catégories</a></li>
+            <li>
+                <div id="img-container">
+                    <img src="files/profiles/<?php echo $_SESSION["img"] == null ? "default_profile.jpg" : $_SESSION["img"]; ?>">
+                </div>
+                <a href="logout">Déconnexion</a>
+            </li>
         </ul>
+    </header>
+
+    <header id="cell-disconnect">
+        <div>
+            <div id="img-container">
+                <img src="files/profiles/<?php echo $_SESSION["img"] == null ? "default_profile.jpg" : $_SESSION["img"]; ?>">
+            </div>
+            <a href="logout">Déconnexion</a>
+        </div>
     </header>
 
     <main>

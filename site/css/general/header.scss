@@ -2,16 +2,19 @@
 @import "../variables";
 
 $headerPadding: 60px;
+$headerHeight: 70px;
+$profileImagePadding: 10px;
 
 header {
   width: calc(100% - 2 * #{$headerPadding});
-  height: 70px;
+  height: $headerHeight;
   border-bottom: 1px solid $fieldBorder;
   background: #fff;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 0 $headerPadding;
+  z-index: 2;
 
   a {
     text-decoration: none;
@@ -40,15 +43,39 @@ header {
     list-style-type: none;
     padding: 0;
     display: flex;
+    align-items: center;
+    height: 100%;
 
     li {
+      display: flex;
+      position: relative;
       font-family: "Poppins", Arial, Helvetica, sans-serif;
       font-size: 12px;
       font-weight: 400;
       margin: 0 15px;
       position: relative;
+      align-items: center;
 
-      &::after {
+      #img-container + a {
+        opacity: 0;
+        left: 50%;
+        transform: translateX(-50%);
+        margin: 0;
+      }
+
+      &:hover #img-container {
+        opacity: 0;
+
+        & + a {
+          opacity: 1;
+        }
+      }
+
+      &:last-of-type {
+        margin: 15px 30px;
+      }
+
+      &:not(:last-of-type)::after {
         content: "";
         position: absolute;
         width: 110%;
@@ -62,10 +89,104 @@ header {
         transition: opacity $shortDelay ease;
       }
 
-      &:hover::after {
+      &:not(:last-of-type):hover::after {
         opacity: 1;
         visibility: visible;
       }
+    }
+  }
+}
+
+#cell-disconnect {
+  display: none;
+
+  > div {
+    display: flex;
+    position: relative;
+    height: 100%;
+    max-width: 200px;
+    margin: 0 auto;
+    justify-content: center;
+    align-items: center;
+  }
+}
+
+#img-container {
+  display: block;
+  position: relative;
+  height: calc(#{$headerHeight} - 2 * #{$profileImagePadding});
+  width: calc(#{$headerHeight} - 2 * #{$profileImagePadding});
+  overflow: hidden;
+  border-radius: 50%;
+
+  img {
+    display: block;
+    height: 100%;
+    padding: $profileImagePadding;
+    width: auto;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
+
+  + a {
+    position: absolute;
+    font-family: "Poppins", Arial, Helvetica, sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    margin-left: 15px;
+
+    &::after {
+      content: "";
+      position: absolute;
+      width: 110%;
+      height: 2px;
+      background: $text;
+      bottom: -3px;
+      left: -5%;
+      opacity: 0;
+      visibility: hidden;
+
+      transition: opacity $shortDelay ease;
+    }
+
+    &:hover::after {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
+
+@media screen and (max-width: 500px) {
+  header {
+    position: fixed;
+    bottom: 0;
+    border-top: 1px solid $fieldBorder;
+
+    ul li:last-of-type {
+      display: none;
+    }
+  }
+
+  #cell-disconnect {
+    width: 100%;
+    padding: 0;
+    display: block;
+    position: relative;
+    border-bottom: 1px solid $fieldBorder;
+    border-top: none;
+
+    > div {
+      max-width: none;
+      width: 350px;
+      margin: 0 auto;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    a {
+      position: relative;
     }
   }
 }
@@ -74,5 +195,9 @@ header {
   header {
     width: calc(100% - 40px);
     padding: 0 20px;
+  }
+
+  #cell-disconnect > div {
+    width: 300px;
   }
 }

@@ -1,0 +1,77 @@
+main {
+  width: 550px;
+  margin: 0 auto;
+}
+
+main section {
+  width: calc(100% - 2px);
+  margin: 40px 0;
+  padding: 15px 0;
+  background: #fff;
+  border: 1px solid #a0a0a0;
+  border-radius: 4px;
+}
+
+main section h3 {
+  text-align: center;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 14px;
+  font-weight: 600;
+  margin: 10px 0;
+}
+
+main section p {
+  width: 80%;
+  margin: 0 10%;
+  text-align: center;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 600;
+  color: #cb1036;
+}
+
+main section form {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  margin: 10px 0;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+main section form input,
+main section form button {
+  min-width: 150px;
+  width: 40%;
+  padding: 3px 10px;
+  margin: 3px 0;
+  font-family: "Poppins", Arial, Helvetica, sans-serif;
+  font-size: 12px;
+  font-weight: 400;
+  border-radius: 5px;
+  border: 1px solid #a0a0a0;
+}
+
+main section form button {
+  width: 120px;
+  cursor: pointer;
+  margin: 7px 0;
+}
+
+@media screen and (max-width: 600px) {
+  main {
+    width: 350px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  main {
+    width: 300px;
+  }
+}
+/*# sourceMappingURL=login.css.map */
