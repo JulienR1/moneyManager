@@ -58,7 +58,6 @@ class Login extends Controller
         if ($userData != null) {
             if (sizeof($userData) === 1) {
                 $userData = $userData[0];
-                print_r($userData);
                 if (password_verify($password, $userData["password"])) {
                     $_SESSION["connected"] = true;
                     $_SESSION["firstname"] = $userData["firstname"];

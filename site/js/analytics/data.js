@@ -3,7 +3,9 @@ const EXPENSE_RED = "#ff2934";
 
 document.addEventListener("DOMContentLoaded", () => {
   loadData(null);
-  onPickerClosedCallback = () => { loadData(null); };
+  onPickerClosedCallback = () => {
+    loadData(null);
+  };
 });
 
 let completeData = [];
@@ -50,9 +52,9 @@ function onLoadSuccess(data) {
   buildAnalytics();
 }
 
-function renderEmptyData(){
+function renderEmptyData() {
   var emptyData = completeData === null || categoryData === null;
-  document.querySelectorAll(".no-data-msg").forEach((msg)=>{
+  document.querySelectorAll(".no-data-msg").forEach((msg) => {
     msg.style.display = emptyData ? "block" : "none";
   });
 }
@@ -66,12 +68,12 @@ function buildAnalytics() {
 
 function rebuildCircularDiagrams() {
   categoryAmountChart.data.datasets = [];
-  categorySumChart.data.datasets = [];  
+  categorySumChart.data.datasets = [];
 
-  if(categoryData !== null && completeData !== null){
+  if (categoryData !== null && completeData !== null) {
     var data = getCategoryDatasets();
     setChartData(categoryAmountChart, data.sumDataset, data.totalSumDataset, true);
-    setChartData(categorySumChart, data.countDataset, data.totalCountDataset, true);     
+    setChartData(categorySumChart, data.countDataset, data.totalCountDataset, true);
   }
 
   categorySumChart.update();
@@ -93,7 +95,7 @@ function getCategoryDatasets() {
   categoryData.forEach((data) => {
     var label = "<i class='" + data.iconUrl + "'></i><span>" + (data.isIncome == 1 ? "Revenus" : "Dépenses");
     addLabelToDataset(label, [patterns.sumDataset, patterns.countDataset]);
-    
+
     var color = data.isIncome == 1 ? REVENUE_GREEN : EXPENSE_RED;
     addDataToDataset(patterns.sumDataset, data.total, color);
     addDataToDataset(patterns.countDataset, data.count, color);
@@ -103,7 +105,7 @@ function getCategoryDatasets() {
       augmentDataFromDataset(patterns.totalCountDataset, data.count);
     } else {
       var totalColor = "#" + data.color;
-      addDataToDataset(patterns.totalSumDataset, data.total, totalColor)
+      addDataToDataset(patterns.totalSumDataset, data.total, totalColor);
       addDataToDataset(patterns.totalCountDataset, data.count, totalColor);
 
       var totalLabel = "<i class='" + data.iconUrl + "'></i><span>" + data.title;
@@ -117,42 +119,42 @@ function getCategoryDatasets() {
   return patterns;
 }
 
-function getEmptyPatterns(){
+function getEmptyPatterns() {
   return {
     sumDataset: getSingleEmptyPattern(),
     totalSumDataset: getSingleEmptyPattern(),
     countDataset: getSingleEmptyPattern(),
-    totalCountDataset: getSingleEmptyPattern()
+    totalCountDataset: getSingleEmptyPattern(),
   };
 }
 
-function getSingleEmptyPattern(){
+function getSingleEmptyPattern() {
   return {
     labels: [],
     data: [],
     backgroundColor: [],
-    weight: 1
+    weight: 1,
   };
 }
 
-function addLabelToDataset(label, datasets){
-  datasets.forEach((dataset)=>{
+function addLabelToDataset(label, datasets) {
+  datasets.forEach((dataset) => {
     dataset.labels.push(label);
   });
 }
 
-function addDataToDataset(dataset, value, color){
+function addDataToDataset(dataset, value, color) {
   dataset.data.push(value);
   dataset.backgroundColor.push(color);
 }
 
-function augmentDataFromDataset(dataset, amountToAdd) {  
+function augmentDataFromDataset(dataset, amountToAdd) {
   dataset.data[dataset.data.length - 1] = parseFloat(dataset.data[dataset.data.length - 1]) + parseFloat(amountToAdd);
 }
 
-function roundDataset(dataset, precision){  
+function roundDataset(dataset, precision) {
   var precisionFactor = Math.pow(100, 2);
-  for(var i = 0; i < dataset.data.length; i ++){
+  for (var i = 0; i < dataset.data.length; i++) {
     dataset.data[i] = (Math.round(dataset.data[i] * precisionFactor) / precisionFactor).toFixed(precision);
   }
 }
@@ -216,15 +218,18 @@ function getRowHtml(rowData) {
   return html;
 }
 
-function rebuildSummaryTable(){
-  var revenueCount = 0, revenueAmount = 0, expenseCount = 0, expenseAmount = 0;
+function rebuildSummaryTable() {
+  var revenueCount = 0,
+    revenueAmount = 0,
+    expenseCount = 0,
+    expenseAmount = 0;
 
-  if(summaryData !== null){
-    for(var i = 0; i < summaryData.length; i ++){
-      if(summaryData[i].isIncome == 0){
+  if (summaryData !== null) {
+    for (var i = 0; i < summaryData.length; i++) {
+      if (summaryData[i].isIncome == 0) {
         expenseCount = parseInt(summaryData[i].count);
         expenseAmount = roundValue(parseFloat(summaryData[i].total), 2);
-      }else if(summaryData[i].isIncome == 1){
+      } else if (summaryData[i].isIncome == 1) {
         revenueCount = parseInt(summaryData[i].count);
         revenueAmount = roundValue(parseFloat(summaryData[i].total), 2);
       }
@@ -236,50 +241,61 @@ function rebuildSummaryTable(){
 
   let table = document.getElementById("summary-table");
   var html = "<tr><th>Revenus</th><th>Dépenses</th><th>Total</th></tr>";
-  html += "<tr><td>"+revenueCount+"</td><td>"+expenseCount+"</td><td>"+countTotal+"</td></tr>";
-  html += "<tr><td ispositive=1>"+revenueAmount+"$</td><td ispositive=0>"+expenseAmount+"$</td><td ispositive="+(amountTotal>=0?1:0)+">"+amountTotal+"$</td></tr>";
+  html += "<tr><td>" + revenueCount + "</td><td>" + expenseCount + "</td><td>" + countTotal + "</td></tr>";
+  html += "<tr><td ispositive=1>" + revenueAmount + "$</td><td ispositive=0>" + expenseAmount + "$</td><td ispositive=" + (amountTotal >= 0 ? 1 : 0) + ">" + amountTotal + "$</td></tr>";
   table.innerHTML = html;
 }
 
-function roundValue(value, precision){
+function roundValue(value, precision) {
   var precisionFactor = Math.pow(10, precision);
   return (Math.round(value * precisionFactor) / precisionFactor).toFixed(precision);
 }
 
-function rebuildTimeProgress(){
+function rebuildTimeProgress() {
   let color = "red";
   let labels = [];
   let dataset = {
     borderColor: color,
     pointBackgroundColor: color,
     pointHitRadius: 3,
-    pointRadius: 4,
     pointHoverRadius: 5,
     lineTension: 0,
     data: [],
-    transactions: []
-  }
+    transactions: [],
+    pointRadius: [],
+  };
 
-  if(completeData !== null){
-    let currentAmount = 0;
-    let transactions = [];
-    let lastDate = completeData[0].transactionDate;
-    completeData.forEach((data) => {    
-      if(data.transactionDate !== lastDate){
-        dataset.transactions.push(transactions);
-        dataset.data.push(currentAmount);      
-        labels.push(lastDate);
-        lastDate = data.transactionDate;
-        transactions = [];
+  let boundaryDates = getDates();
+  if (boundaryDates.start > boundaryDates.end) return;
+
+  var currentTransactionIndex = 0;
+  let currentAmount = 0;
+  let transactions = [];
+  for (var d = new Date(boundaryDates.start); d <= new Date(boundaryDates.end); d.setDate(d.getDate() + 1)) {
+    if (completeData !== null) {
+      while (completeData[currentTransactionIndex] !== undefined && new Date(completeData[currentTransactionIndex].transactionDate).getTime() === d.getTime()) {
+        var data = completeData[currentTransactionIndex];
+        var expenseFactor = data.isIncome == 1 ? 1 : -1;
+        currentAmount += expenseFactor * parseFloat(data.amount);
+        transactions.push({ title: data.title, amount: data.amount, isIncome: data.isIncome });
+
+        currentTransactionIndex++;
       }
-      
-      var expenseFactor = (data.isIncome == 1) ? 1 : -1;
-      currentAmount += expenseFactor * parseFloat(data.amount);
-      transactions.push({title: data.title, amount: data.amount, isIncome: data.isIncome});
-    });
-    dataset.transactions.push(transactions);
+    }
+
+    if (transactions.length > 0) {
+      dataset.transactions.push(transactions);
+      dataset.pointRadius.push(4);
+      transactions = [];
+    } else {
+      dataset.transactions.push([]);
+      dataset.pointRadius.push(0);
+    }
+
     dataset.data.push(currentAmount);
-    labels.push(lastDate);
+    var labelDate = new Date(d);
+    labelDate.setDate(d.getDate() + 1);
+    labels.push(labelDate.toISOString().substring(0, 10));
   }
 
   progressChart.data.datasets = [];
