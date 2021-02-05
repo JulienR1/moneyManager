@@ -293,9 +293,7 @@ function rebuildTimeProgress() {
     }
 
     dataset.data.push(currentAmount);
-    var labelDate = new Date(d);
-    labelDate.setDate(d.getDate() + 1);
-    labels.push(labelDate.toISOString().substring(0, 10));
+    labels.push(d.toISOString().substring(0, 10));
   }
 
   progressChart.data.datasets = [];
